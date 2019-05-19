@@ -1,0 +1,30 @@
+
+<head>
+    <title> Lista produktów na stanie.</title>
+    <link href="{{ asset('bundles/vending_machine/css/main.css') }}" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa produktu</th>
+            <th>Cena</th>
+            <th>Ilość na stanie</th>
+        </tr>
+
+        {% for product in products %}
+            <tr>
+                <td> {{ product.getId }} </td>
+                <td> {{ product.getProductName }} </td>
+                <td> {{  product.getPrice }} </td>
+                <td> {{  product.getStock }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <a href="{{ path('newItem') }}"> Dodaj kolejny produkt </a>
+
+</body>
+

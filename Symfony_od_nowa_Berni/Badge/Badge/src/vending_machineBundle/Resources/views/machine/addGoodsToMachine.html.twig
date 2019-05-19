@@ -1,0 +1,17 @@
+<head>
+    <title> Dodaj nowe produkty.</title>
+    <link href="{{ asset('bundles/vending_machine/css/main.css') }}" type="text/css" rel="stylesheet"/>
+</head>
+
+
+    <form method="post" action="{{ path('createItem') }}">
+        Item name:<br>
+        <input type="text" name="product_name"><br>
+        Price:<br>
+        <input type="number" name="price" min="0" step="0.01"><br>
+        Stock:<br>
+        <input type="number" name="stock" min="0" step="1"><br><br>
+        <input type="submit" value="Dodaj produkt">
+    </form>
+    <hr>
+    <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a>

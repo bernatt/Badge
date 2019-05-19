@@ -1,0 +1,128 @@
+<?php
+
+namespace vending_machineBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * machine
+ *
+ * @ORM\Table(name="machine")
+ * @ORM\Entity(repositoryClass="vending_machineBundle\Repository\machineRepository")
+ */
+class machine
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="product_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $product_id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="product_name", type="string", unique=true)
+     */
+    private $productName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
+     */
+    private $price;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="stock", type="integer", nullable=true)
+     */
+    private $stock;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * Set productName
+     *
+     * @param string $productName
+     *
+     * @return machine
+     */
+    public function setProductName($productName)
+    {
+        $this->productName = $productName;
+
+        return $this;
+    }
+
+    /**
+     * Get productName
+     *
+     * @return string
+     */
+    public function getProductName()
+    {
+        return $this->productName;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     *
+     * @return machine
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     *
+     * @return machine
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return int
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+}
+

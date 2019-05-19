@@ -1,0 +1,20 @@
+table, th, td {
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+input[type=text]{
+    margin: 8px;
+    border-radius: 8px;
+    background-color: #3CBC8D; <!-- kolor tła w inpucie -->
+}
+input[type=number]{
+    margin: 8px;
+    border-radius: 8px;
+    background-color: #3CBC8D;
+}
+
+input[type=submit]{
+    margin-left: 40px;
+    border-radius: 8px;
+}
