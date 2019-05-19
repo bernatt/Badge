@@ -12,6 +12,7 @@
             <th>Nazwa produktu</th>
             <th>Cena</th>
             <th>Ilość na stanie</th>
+            <th>Akcja</th>
         </tr>
 
         {% for product in products %}
@@ -20,6 +21,7 @@
                 <td> {{ product.getProductName }} </td>
                 <td> {{  product.getPrice }} </td>
                 <td> {{  product.getStock }} </td>
+                <td> <a href="{{ path('editItem', {'id' : product.getId}) }}">Edytuj</a> </td>
             </tr>
         {% endfor %}
     </table>

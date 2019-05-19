@@ -8,43 +8,69 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use vending_machineBundle\Entity\machine;
+use vending_machineBundle\Form\machineType;
 
 
 class machineController extends Controller
 {
 
     /**
-     *@Route("/newItem" , name="newItem")
+     *@Route("/newItem" , name="newItem", methods="GET")
+     *@Route("/newItem" , name="createItem", methods="POST")
      *@Template("@vending_machine/machine/addGoodsToMachine.html.twig")
      */
 
-    public function newItemAction()
+    public function newItemAction(Request $request)
     {
-        return [];
+        if ($request->isMethod('GET')) {
+            $item = new machine();
+            $form = $this->createForm(machineType::class, $item, [
+                'action' => $this->generateUrl('createItem')
+            ]);
+            return ['form' => $form->createView()];
+        }
+
+        $createItem = new machine();
+        $form = $this->createForm(machineType::class, $createItem);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $createUser = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($createUser);
+            $em->flush();
+        }
+        return new Response('Produkt dodany');
     }
 
     /**
-     * @Route("/createItem" , name="createItem")
+     * @Route("/{id}/modifyItem" , name="editItem")
+     * @Template("@vending_machine/machine/addGoodsToMachine.html.twig")
      */
 
-    public function createItemAtcion(Request $request)
+    public function modifyUserAction(Request $request, $id)
     {
-        $newItem = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('vending_machineBundle:machine');
+        $item = $repository->find($id);
 
-        $itemToAdd = new machine();
-        $itemToAdd->setProductName($newItem['product_name']);
-        $itemToAdd->setPrice($newItem['price']);
-        $itemToAdd->setStock($newItem['stock']);
+        if (!$item) {
+            return new Response('Przedmiot o podanym ID nie istnieje');
+        }
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($itemToAdd);
-        $entityManager->flush();
+        $form = $this->createForm(machineType::class, $item);
+        $form->handleRequest($request);
 
-        echo '<a href="http://127.0.0.1:8000/newItem">Dodaj więcej produktów</a><br><br>';
-        echo '<a href="http://127.0.0.1:8000/availableGoods">Zobacz listę dostępnych produktów</a><br><br>';
+        if ($form->isSubmitted() && $form->isValid()) {
+            $item = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($item);
+            $em->flush();
 
-
-        return new Response('Nowy produkt o ID= '.$itemToAdd->getId().' dodany! '.' Nazwa: ' .$itemToAdd->getProductName().', cena: '.$itemToAdd->getPrice().', ilość: '.$itemToAdd->getStock());
+            return new Response('Przedmiot pomyślnie zmodyfikowany');
+        }
+        return['form' => $form->createView()];
     }
 
     /**
