@@ -1,0 +1,33 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+ {% block body %}
+     <table>
+         <tr>
+             <th>ID</th>
+             <th>Imię</th>
+             <th>Nazwisko</th>
+             <th>Nr badga</th>
+             <th>Dostępne środki</th>
+             <th>Akcja</th>
+             <th>Wpłać środki</th>
+
+         </tr>
+
+         {% for user in users %}
+             <tr>
+                 <td> {{ user.getId }} </td>
+                 <td> {{ user.getName }} </td>
+                 <td> {{  user.getSurname }} </td>
+                 <td> {{  user.getBadgeNr }} </td>
+                 <td> {{  user.getCash }} </td>
+                 <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
+                 <td>
+                     <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
+                        <input id="deposit" type="number" step="1" min="1" name="deposit">
+                         <input type="submit" value="Wpłać">
+                     </form>
+                 </td>
+             </tr>
+         {% endfor %}
+     </table>
+ {% endblock %}

@@ -1,0 +1,20 @@
+{% block head %}
+    <head>
+        <title> Vendor project</title>
+        <link href="{{ asset('bundles/vending_machine/css/main.css') }}" type="text/css" rel="stylesheet"/>
+    </head>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+
+{% block footer %}
+
+    <hr>
+    <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a><br>
+    <a href="{{ path('newItem') }}"> Dodaj przedmiot </a><br>
+    <a href="{{ path('newemployee') }}"> Dodaj użytkownika </a><br>
+    <a href="{{ path('showemployees') }}"> Lista pracowników </a><br>
+
+{% endblock %}

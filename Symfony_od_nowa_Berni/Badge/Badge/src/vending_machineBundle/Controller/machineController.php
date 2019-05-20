@@ -41,7 +41,7 @@ class machineController extends Controller
             $em->persist($createUser);
             $em->flush();
         }
-        return new Response('Produkt dodany');
+        return $this->redirect('/availableGoods');
     }
 
     /**
@@ -68,7 +68,7 @@ class machineController extends Controller
             $em->persist($item);
             $em->flush();
 
-            return new Response('Przedmiot pomyślnie zmodyfikowany');
+            return $this->redirect('/availableGoods');
         }
         return['form' => $form->createView()];
     }
@@ -90,3 +90,4 @@ class machineController extends Controller
         ];
     }
 }
+// Dodaj teraz opcję KUP w automacie !!
