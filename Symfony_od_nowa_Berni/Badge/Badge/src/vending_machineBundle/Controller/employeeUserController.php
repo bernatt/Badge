@@ -53,7 +53,7 @@ class employeeUserController extends Controller
     public function modifyEmployeeAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('vending_machineBundle:employee');
+        $repository = $em->getRepository('vending_machineBundle:User');
         $employee = $repository->find($id);
 
         if (!$employee) {

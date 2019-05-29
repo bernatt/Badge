@@ -10,60 +10,102 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        {% block logInCheckout %}
-            <div class="logincheckout">
+    <div class="wrapper">
+        <nav>
 
-                <div class="loggedIn">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                        <a href="{{ path('fos_user_security_logout') }}">
-                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
-                    {% else %}
-                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                    {% endif %}
-                </div>
+                <div class="logincheckout">
+                    <div class="logo"> <span style="color: brown"> Projekt</span> &copy; Badge</div>
+                    <div class="loggedIn">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                            <a href="{{ path('fos_user_security_logout') }}">
+                               <span style="color: brown"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </span>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('fos_user_security_login') }}"> <span style="color: brown"> {{ 'layout.login'|trans({}, 'FOSUserBundle') }} </span></a>
+                        {% endif %}
+                    </div>
+              </div>
+            <div style="clear: both;"></div>
+            <div class="menu">
+                <ol>
+                    <li><a href="{{ path('homepage') }}"> Strona główna </a></li>
+                    <li><a href="#"> Użytkownik</a>
+                        <ul>
+                            <li><a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a></li>
+                            <li><a href="{{ path('showemployees') }}"> Lista użytkowników </a></li>
+                            <li><a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a></li>
+                            <li><a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło </a></li>
+                            <li><a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Automat</a>
+                        <ul>
+                            <li><a href="{{ path('newItem') }}"> Dodaj produkt </a></li>
+                            <li><a href="{{ path('stockInMachine') }}"> Lista produktów </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Stołówka</a></li>
+                </ol>
 
-                {% if app.request.hasPreviousSession %}
-                    {% for type, messages in app.session.flashbag.all() %}
-                        {% for message in messages %}
-                            <div class="flash-{{ type }}" style="float: left">
-                                {{ message }}
-                            </div>
+            </div>
 
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
 
-          </div>
+        </nav>
 
+        <div class="content">
+
+            {% block header %} <h1> Strona główna </h1>{% endblock %}
+
+            {% block body %}{% endblock %}
+
+            {% block fos_user_content %}{% endblock fos_user_content %}
+        </div>
+
+        <div class="footer">
+
+        {% block footer %}
+
+        {#
+            <a href="{{ path('homepage') }}"> Strona startowa </a><br>
+            <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a><br>
+            <a href="{{ path('newItem') }}"> Dodaj przedmiot </a><br>
+            <a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a><br>
+            <a href="{{ path('showemployees') }}"> Lista pracowników </a><br>
+            <a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a><br>
+            <a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło ( nie za bardzo działa - ogarnij ) </a><br>
+            <a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil ( do usunięcia, pracownik nie może zmieniać danych) </a><br>
+
+            #}
         {% endblock %}
-    </nav>
 
-    <div class="content">
-
-        {% block header %} <h1> Strona startowa </h1>{% endblock %}
-
-        {% block body %}{% endblock %}
-
-        {% block fos_user_content %}{% endblock fos_user_content %}
+        </div>
     </div>
+    <script src="{{ asset('bundles/vending_machine/jquery/jquery-1.11.3.min.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            var NavY = $('.menu').offset().top;
+
+            var stickyNav = function(){
+                var ScrollY = $(window).scrollTop();
+
+                if (ScrollY > NavY) {
+                    $('.menu').addClass('sticky');
+                } else {
+                    $('.menu').removeClass('sticky');
+                }
+            };
+
+            stickyNav();
+
+            $(window).scroll(function() {
+                stickyNav();
+            });
+        });
+
+    </script>
+
 </body>
-
-    {% block footer %}
-
-
-        <a href="{{ path('homepage') }}"> Strona startowa </a><br>
-        <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a><br>
-        <a href="{{ path('newItem') }}"> Dodaj przedmiot </a><br>
-        <a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a><br>
-        <a href="{{ path('showemployees') }}"> Lista pracowników </a><br>
-        <a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a><br>
-        <a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło ( nie za bardzo działa - ogarnij ) </a><br>
-        <a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil ( do usunięcia, pracownik nie może zmieniać danych) </a><br>
-
-
-    {% endblock %}
-
 </html>
