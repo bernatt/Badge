@@ -1,4 +1,9 @@
 {% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title> Dodaj przedmiot </title> {% endblock %}
+
+{% block header %} <h1> Dodaj nowy przedmiot do dystrybutora</h1> {% endblock %}
+
 {% block body %}
     {{ form_start(form) }}
     {{ form_widget(form) }}

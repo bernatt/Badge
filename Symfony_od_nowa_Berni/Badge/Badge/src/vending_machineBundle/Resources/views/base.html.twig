@@ -1,20 +1,69 @@
-{% block head %}
-    <head>
-        <title> Vendor project</title>
-        <link href="{{ asset('bundles/vending_machine/css/main.css') }}" type="text/css" rel="stylesheet"/>
-    </head>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    {% block title %} <title>Projekt Badge</title> {% endblock %}
+    <meta name="description" content="Użyteczności badga pracowniczego od strony gastronomicznej">
+    <meta name="author" content="Berni">
 
-{% block body %}
-{% endblock %}
+    <link href="{{ asset('bundles/vending_machine/css/main.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        {% block logInCheckout %}
+            <div class="logincheckout">
+
+                <div class="loggedIn">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    {% endif %}
+                </div>
+
+                {% if app.request.hasPreviousSession %}
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="flash-{{ type }}" style="float: left">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+          </div>
+
+        {% endblock %}
+    </nav>
+
+    <div class="content">
+
+        {% block header %} <h1> Strona startowa </h1>{% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% block fos_user_content %}{% endblock fos_user_content %}
+    </div>
+</body>
+
+    {% block footer %}
 
 
-{% block footer %}
+        <a href="{{ path('homepage') }}"> Strona startowa </a><br>
+        <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a><br>
+        <a href="{{ path('newItem') }}"> Dodaj przedmiot </a><br>
+        <a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a><br>
+        <a href="{{ path('showemployees') }}"> Lista pracowników </a><br>
+        <a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a><br>
+        <a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło ( nie za bardzo działa - ogarnij ) </a><br>
+        <a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil ( do usunięcia, pracownik nie może zmieniać danych) </a><br>
 
-    <hr>
-    <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a><br>
-    <a href="{{ path('newItem') }}"> Dodaj przedmiot </a><br>
-    <a href="{{ path('newemployee') }}"> Dodaj użytkownika </a><br>
-    <a href="{{ path('showemployees') }}"> Lista pracowników </a><br>
 
-{% endblock %}
+    {% endblock %}
+
+</html>

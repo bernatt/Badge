@@ -1,21 +1,58 @@
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid #bbbbbb;
     border-radius: 4px;
     text-align: center;
+    padding: 3px;
 }
 
-input[type=text]{
+input{
     margin: 8px;
     border-radius: 8px;
     background-color: #3CBC8D; <!-- kolor tła w inpucie -->
 }
-input[type=number]{
-    margin: 8px;
-    border-radius: 8px;
-    background-color: #3CBC8D;
-}
 
 input[type=submit]{
-    margin-left: 40px;
+    margin-left: 100px;
     border-radius: 8px;
+    background-color: #FFFFFF;
+}
+
+body
+{
+    margin-top: 20px;
+    background-color: #303030;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+}
+
+a
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #cccccc;
+}
+
+.logincheckout
+{
+    width: 100%;
+
+}
+
+.loggedIn
+{
+    margin-left: 1600px;
+    font-size: 18px;
+}
+
+.content
+{
+    margin-top: 40px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
