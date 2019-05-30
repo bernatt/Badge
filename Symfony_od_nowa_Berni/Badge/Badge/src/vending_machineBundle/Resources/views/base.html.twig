@@ -34,12 +34,13 @@
                     <li><a href="{{ path('homepage') }}"> Strona główna </a></li>
                     <li><a href="#"> Użytkownik</a>
                         <ul>
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showprofile') }}"> Pokaż profil </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showemployees') }}"> Lista użytkowników </a></li>{% endif %}
                             {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a></li>{% endif %}
                             {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło </a></li>{% endif %}
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil </a></li>{% endif %}
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showprofile') }}"> Pokaż profil </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('moneyboost') }}"> Doładuj konto </a></li>{% endif %}
                         </ul>
                     </li>
                     <li><a href="#">Automat</a>

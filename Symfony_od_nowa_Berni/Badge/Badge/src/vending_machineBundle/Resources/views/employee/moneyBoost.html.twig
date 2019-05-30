@@ -1,0 +1,19 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Doładuj konto</title> {% endblock %}
+
+{% block header %} <h1> Doładuj konto </h1>{% endblock %}
+
+ {% block body %}
+        <p style="margin-top: 75px; font-size: 22px;">
+            Aktualny stan Twojego konta wynosi: <span style="color: brown">{{ user.getCash }}</span>
+        </p>
+        <p style="margin-bottom: 70px;">
+            Wybierz interesującą Cię kwotę i doładuj konto.
+        </p>
+                     <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
+                         <input id="amount" type="number" step="1" min="1" name="amount"><br>
+                         <input type="submit" value="Doładuj">
+                     </form>
+
+ {% endblock %}

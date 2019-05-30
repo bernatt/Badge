@@ -48,6 +48,7 @@ class employeeUserController extends Controller
     /**
      * @Route("/{id}/modifyEmployee" , name="editemployee")
      * @Template("@vending_machine/employee/modifyEmployee.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
     public function modifyEmployeeAction(Request $request, $id)
@@ -77,6 +78,7 @@ class employeeUserController extends Controller
     /**
      * @Route("/showEmployees" , name="showemployees")
      * @Template("@vending_machine/employee/employeeList.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
     public function listOfEmployeeAction()
@@ -94,6 +96,7 @@ class employeeUserController extends Controller
     /**
      * @Route("/showProfile" , name="showprofile")
      * @Template("@vending_machine/employee/showProfile.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function showProfileAction()
@@ -111,6 +114,7 @@ class employeeUserController extends Controller
 
     /**
      * @Route("/payment/{id}", name="deposit", methods="POST")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function depositAction(Request $request, $id)
@@ -124,12 +128,31 @@ class employeeUserController extends Controller
         $em->persist($employee);
         $em->flush();
 
-        return $this->redirect('/showEmployees');
+        return $this->redirect('/moneyBoost');
+    }
+
+    /**
+     * @Route("/moneyBoost", name="moneyboost")
+     * @Template("@vending_machine/employee/moneyBoost.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function moneyBoostAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('vending_machineBundle:User');
+        $userId = $this->getUser()->getId();
+        $user = $repository->findOneById($userId);
+
+        return [
+            'user' => $user
+        ];
     }
 
     /**
      * @Route("/buyFromMachine/{user_id}/{product_id}", name="buyfrommachine")
      * @Template("@vending_machine/employee/noEnoughMoney.html.twig")
+     * @Security("has_role('ROLE_USER')")
      *
      * Metoda pozwalająca użytkownikowi kupić produkt w automacie.
      * Korzysta z dwóch encji ( machine i User ),
@@ -184,6 +207,7 @@ class employeeUserController extends Controller
     /**
      * @Route("/showHistory", name="showhistory")
      * @Template("@vending_machine/employee/showHistory.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function showHistoryAction()
@@ -201,6 +225,7 @@ class employeeUserController extends Controller
 
     /**
      * @Route("/clearHistory", name="clearhistory")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function clearHistoryAction()

@@ -25,7 +25,7 @@
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
                  <td>
                      <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
-                        <input id="amount" type="number" step="1" min="1" name="amount">
+                        <input style="width: 100px;" id="amount" type="number" step="1" min="1" name="amount">
                          <input type="submit" value="Doładuj">
                      </form>
                  </td>

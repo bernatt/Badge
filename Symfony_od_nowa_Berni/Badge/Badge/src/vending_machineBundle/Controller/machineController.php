@@ -9,15 +9,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use vending_machineBundle\Entity\machine;
 use vending_machineBundle\Form\machineType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class machineController extends Controller
 {
 
     /**
-     *@Route("/newItem" , name="newItem", methods="GET")
-     *@Route("/newItem" , name="createItem", methods="POST")
-     *@Template("@vending_machine/machine/addGoodsToMachine.html.twig")
+     * @Route("/newItem" , name="newItem", methods="GET")
+     * @Route("/newItem" , name="createItem", methods="POST")
+     * @Template("@vending_machine/machine/addGoodsToMachine.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function newItemAction(Request $request)
@@ -47,9 +49,10 @@ class machineController extends Controller
     /**
      * @Route("/{id}/modifyItem" , name="editItem")
      * @Template("@vending_machine/machine/addGoodsToMachine.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
-    public function modifyUserAction(Request $request, $id)
+    public function modifyItemAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('vending_machineBundle:machine');
@@ -76,6 +79,7 @@ class machineController extends Controller
     /**
      * @Route("/availableGoods" , name="stockInMachine")
      * @Template("@vending_machine/machine/availableGoods.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
     public function availableGoodsAdminAction()
@@ -98,6 +102,7 @@ class machineController extends Controller
     /**
      * @Route("/availableGoodsUser" , name="stockInMachineUser")
      * @Template("@vending_machine/machine/availableGoodsForUser.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function availableGoodsUserAction()
