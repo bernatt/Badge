@@ -5,5 +5,10 @@
 {% block header %} <h1> Historia Zakupów: </h1>{% endblock %}
 
  {% block body %}
+     {% if user.getHistory != '' %}
     {{ user.getHistory }}
+     {% else %}
+        <p style="margin-top: 75px; font-size: 22px; margin-bottom: 0;">Historia Twoich transakcji jest pusta!</p>
+         <p style="font-size: 22px; margin-top: 5px;">Świadczy to iż jesteś świeżym użytkownikiem bądź resetowałeś historię.</p>
+     {% endif %}
  {% endblock %}

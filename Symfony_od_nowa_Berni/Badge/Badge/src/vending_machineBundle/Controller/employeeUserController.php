@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 //use vending_machineBundle\Entity\employee;
 use vending_machineBundle\Form\employeeType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 
@@ -87,6 +88,24 @@ class employeeUserController extends Controller
 
         return[
             'users' => $users
+        ];
+    }
+
+    /**
+     * @Route("/showProfile" , name="showprofile")
+     * @Template("@vending_machine/employee/showProfile.html.twig")
+     */
+
+    public function showProfileAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository('vending_machineBundle:User');
+
+        $userId = $this->getUser()->getId();
+        $user = $repository->findOneById($userId);
+
+        return[
+            'user' => $user
         ];
     }
 

@@ -71,8 +71,8 @@ resetting:
 # Global strings
 layout:
     logout: Wyloguj
-    login: Zaloguj
-    register: Zarejestruj
+    login: Zaloguj się
+    register: Zarejestruj konto
     logged_in_as: 'Zalogowano jako %username%'
 form:
     group_name: 'Nazwa grupy'

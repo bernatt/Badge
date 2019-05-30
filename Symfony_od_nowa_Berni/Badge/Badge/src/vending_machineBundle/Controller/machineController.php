@@ -78,7 +78,29 @@ class machineController extends Controller
      * @Template("@vending_machine/machine/availableGoods.html.twig")
      */
 
-    public function availableGoodsAction()
+    public function availableGoodsAdminAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $machineRepository = $entityManager->getRepository('vending_machineBundle:machine');
+        $userRepository = $entityManager->getRepository('vending_machineBundle:User');
+
+        $loggedUser = $this->getUser()->getId();
+        $user = $userRepository->findOneById($loggedUser);
+
+        $products = $machineRepository->findAll();
+
+        return[
+            'products' => $products,
+            'user' => $user
+        ];
+    }
+
+    /**
+     * @Route("/availableGoodsUser" , name="stockInMachineUser")
+     * @Template("@vending_machine/machine/availableGoodsForUser.html.twig")
+     */
+
+    public function availableGoodsUserAction()
     {
         $entityManager = $this->getDoctrine()->getManager();
         $machineRepository = $entityManager->getRepository('vending_machineBundle:machine');

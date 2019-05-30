@@ -21,9 +21,10 @@
                             <a href="{{ path('fos_user_security_logout') }}">
                                <span style="color: brown"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </span>
                             </a>
-                            <div class="stankonta"> <p>Na koncie posiadasz : &nbsp  &nbsp<span style="color: brown; font-size: 29px;">  {{ app.user.cash }} </span></p></div>
+                            <div class="stankonta"> <p style="margin: 0;">Na koncie posiadasz : &nbsp  &nbsp<span style="color: brown; font-size: 22px;">  {{ app.user.cash }} </span></p></div>
                         {% else %}
-                            <a href="{{ path('fos_user_security_login') }}"> <span style="color: brown"> {{ 'layout.login'|trans({}, 'FOSUserBundle') }} </span></a>
+                            <p style="margin-top: 0;"><a href="{{ path('fos_user_security_login') }}"> <span style="color: brown"> {{ 'layout.login'|trans({}, 'FOSUserBundle') }} </span></a></p>
+                            <p style="margin-bottom: 5px;"><a href="{{ path('fos_user_registration_register') }}"> <span style="color: brown"> {{ 'layout.register'|trans({}, 'FOSUserBundle') }} </span></a></p>
                         {% endif %}
                     </div>
               </div>
@@ -33,24 +34,26 @@
                     <li><a href="{{ path('homepage') }}"> Strona główna </a></li>
                     <li><a href="#"> Użytkownik</a>
                         <ul>
-                            <li><a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a></li>
-                            <li><a href="{{ path('showemployees') }}"> Lista użytkowników </a></li>
-                            <li><a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a></li>
-                            <li><a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło </a></li>
-                            <li><a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil </a></li>
+                            {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showemployees') }}"> Lista użytkowników </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showprofile') }}"> Pokaż profil </a></li>{% endif %}
                         </ul>
                     </li>
                     <li><a href="#">Automat</a>
                         <ul>
-                            <li><a href="{{ path('newItem') }}"> Dodaj produkt </a></li>
-                            <li><a href="{{ path('stockInMachine') }}"> Lista produktów </a></li>
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newItem') }}"> Dodaj produkt </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('stockInMachine') }}"> Stan magazynowy </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %} <li><a href="{{ path('stockInMachineUser') }}"> Kup produkt </a></li>{% endif %}
                         </ul>
                     </li>
                     <li><a href="#">Stołówka</a></li>
                     <li><a href="#">Historia</a>
                         <ul>
-                            <li><a href="{{ path('showhistory') }}"> Zobacz historię zakupów </a></li>
-                            <li><a href="{{ path('clearhistory') }}"> Wyczysć historię zakupów </a></li>
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showhistory') }}"> Zobacz historię zakupów </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('clearhistory') }}"> Wyczysć historię zakupów </a></li>{% endif %}
                         </ul>
                     </li>
 
