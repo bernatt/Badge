@@ -110,6 +110,7 @@ class employeeUserController extends Controller
 
     /**
      * @Route("/buyFromMachine/{user_id}/{product_id}", name="buyfrommachine")
+     * @Template("@vending_machine/employee/noEnoughMoney.html.twig")
      *
      * Metoda pozwalająca użytkownikowi kupić produkt w automacie.
      * Korzysta z dwóch encji ( machine i User ),
@@ -126,21 +127,30 @@ class employeeUserController extends Controller
         $userRepository = $em->getRepository('vending_machineBundle:machine');
         $product = $userRepository->find($product_id);
 
-
+        // Pobieram z formularza wartość quantity
         $quantity = $request->request->get('quantity');
 
+        // Walidacja ilości kupowanego towaru ( załatwiona też w formularzu)
         if ($quantity > $product->getStock()){
+
             return new Response('Brak wystarczającej ilośći produktów');
         }
+        // Metoda odejmująca zakupioną ilość towaru od stocka
         $product->stockCorrection($quantity);
         $price = $product->getPrice() * $quantity;
 
+        // Walidacja stanu gotówki kupującego z odesłaniem do szablonu informującego o kosztach zamówienia
         if ($user->getCash() < $price){
-            return new Response('Nie masz wystarczająco dużo gotówki misiu ;/');
-        }
-        $user->buyFromMachine($price);
 
-        $operationHistory = "Kupiłeś ".$quantity. " ".$product->getProductName().". Zapłaciłeś ".$price.", na koncie pozostało Ci ".$user->getCash().", ";
+            return [
+              'price' => $price,
+              'user' => $user
+            ];
+        }
+        // Metoda pobierająca pieniądze z konta kupującego
+        $user->buyFromMachine($price);
+        // Zapis do historii operacji
+        $operationHistory = "Kupiłeś ".$quantity. " ".$product->getProductName().", zapłaciłeś ".$price.", na koncie pozostało ".$user->getCash().".  ";
         $user->addToHistory($operationHistory);
 
         $em = $this->getDoctrine()->getManager();
@@ -149,8 +159,7 @@ class employeeUserController extends Controller
 
         $em->flush();
 
-        return $this->redirect('/showEmployees');
-
+        return $this->render('@vending_machine/employee/summaryOfPurchases.html.twig',['price' => $price,'user' => $user, 'product' => $product]);
     }
 
     /**
