@@ -124,5 +124,11 @@ class machine
     {
         return $this->stock;
     }
+
+    public function stockCorrection($quantity)
+    {
+        $this->stock = $this->stock - $quantity;
+        return $this;
+    }
 }
 

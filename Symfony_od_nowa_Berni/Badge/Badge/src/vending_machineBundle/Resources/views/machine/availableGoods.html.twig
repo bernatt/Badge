@@ -12,6 +12,7 @@
                 <th>Cena</th>
                 <th>Ilość na stanie</th>
                 <th>Akcja</th>
+                <th>Kup</th>
             </tr>
 
             {% for product in products %}
@@ -21,6 +22,12 @@
                     <td> {{  product.getPrice }} </td>
                     <td> {{  product.getStock }} </td>
                     <td> <a href="{{ path('editItem', {'id' : product.getId}) }}">Edytuj</a> </td>
+                    <td>
+                        <form method="post" action="{{ path('buyfrommachine', {'user_id' : user.getId, 'product_id' : product.getId}) }}">
+                            <input id="quantity" type="number" step="1" min="1" max="{{ product.getStock }}" name="quantity">
+                            <input type="submit" value="Kup">
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

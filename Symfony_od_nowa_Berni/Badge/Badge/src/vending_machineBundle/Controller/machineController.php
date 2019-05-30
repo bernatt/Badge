@@ -81,13 +81,18 @@ class machineController extends Controller
     public function availableGoodsAction()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $repository = $entityManager->getRepository('vending_machineBundle:machine');
+        $machineRepository = $entityManager->getRepository('vending_machineBundle:machine');
+        $userRepository = $entityManager->getRepository('vending_machineBundle:User');
 
-        $products = $repository->findAll();
+        $loggedUser = $this->getUser()->getId();
+        $user = $userRepository->findOneById($loggedUser);
+
+        $products = $machineRepository->findAll();
 
         return[
-            'products' => $products
+            'products' => $products,
+            'user' => $user
         ];
     }
 }
-// Dodaj teraz opcję KUP w automacie !!
+

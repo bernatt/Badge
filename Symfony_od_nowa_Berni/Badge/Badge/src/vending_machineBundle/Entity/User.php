@@ -4,6 +4,7 @@ namespace vending_machineBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use vending_machineBundle\Entity\machine;
 
     /**
     * @ORM\Entity
@@ -34,6 +35,15 @@ use Doctrine\ORM\Mapping as ORM;
          * @ORM\Column(name="cash", type="decimal", precision=10, scale=2)
          */
         private $cash = 0;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="history", type="string", nullable=true)
+         */
+        private $history;
+
+
 
         public function __construct()
         {
@@ -89,9 +99,51 @@ use Doctrine\ORM\Mapping as ORM;
         return $this->badgeNr;
     }
 
-    public function deposit($amount)
+    /**
+     * Set history
+     *
+     * @param string $history
+     *
+     * @return User
+     */
+    public function setHistory($history)
     {
-        $this->cash = $this->cash + $amount;
+        $this->history = $history;
+
         return $this;
     }
+
+    /**
+     * Get history
+     *
+     * @return string
+     */
+    public function getHistory()
+    {
+        return $this->history;
+    }
+
+
+        public function deposit($amount)
+        {
+            $this->cash = $this->cash + $amount;
+            return $this;
+        }
+
+        public function buyFromMachine($price)
+        {
+            $this->cash = $this->cash - $price;
+            return $this;
+        }
+
+        public function addToHistory($history)
+        {
+            $this->history .= $history;
+            return $this;
+        }
+
+        public function clearHistory()
+        {
+            $this->history = '';
+        }
 }
