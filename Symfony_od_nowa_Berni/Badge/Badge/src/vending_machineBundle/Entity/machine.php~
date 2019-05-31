@@ -49,13 +49,6 @@ class machine
      */
     private $transactions;
 
-    public function __toString()
-    {
-        // TODO: Implement __toString() method.
-        return $this->productName;
-
-    }
-
 
     public function __construct()
     {
@@ -150,48 +143,5 @@ class machine
         $this->stock = $this->stock - $quantity;
         return $this;
     }
-
-    /**
-     * Get productId
-     *
-     * @return integer
-     */
-    public function getProductId()
-    {
-        return $this->product_id;
-    }
-
-    /**
-     * Add transaction
-     *
-     * @param \vending_machineBundle\Entity\Transactions $transaction
-     *
-     * @return machine
-     */
-    public function addTransaction(\vending_machineBundle\Entity\Transactions $transaction)
-    {
-        $this->transactions[] = $transaction;
-
-        return $this;
-    }
-
-    /**
-     * Remove transaction
-     *
-     * @param \vending_machineBundle\Entity\Transactions $transaction
-     */
-    public function removeTransaction(\vending_machineBundle\Entity\Transactions $transaction)
-    {
-        $this->transactions->removeElement($transaction);
-    }
-
-    /**
-     * Get transactions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTransactions()
-    {
-        return $this->transactions;
-    }
 }
+

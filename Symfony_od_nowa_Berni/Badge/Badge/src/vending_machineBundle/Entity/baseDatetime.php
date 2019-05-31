@@ -1,9 +1,11 @@
 <?php
 
+namespace vending_machineBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Entity
+*
 *
 *
 */
@@ -15,7 +17,7 @@ abstract class baseDatetime
     /**
     * @var datetime $created
     *
-    * @ORM\Column(type="datetime")
+    * @ORM\Column(type="datetime", nullable = true)
     */
     protected $created;
 

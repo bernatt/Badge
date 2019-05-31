@@ -5,6 +5,7 @@ namespace vending_machineBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use vending_machineBundle\Entity\machine;
+use Doctrine\Common\Collections\ArrayCollection;
 
     /**
     * @ORM\Entity
@@ -44,11 +45,18 @@ use vending_machineBundle\Entity\machine;
          */
         private $history;
 
+        /**
+         * @ORM\OneToMany(targetEntity="Transactions", mappedBy="user")
+         */
+        private $transactions;
+
+
 
         public function __construct()
         {
 
             parent::__construct();
+            $this->transactions = new ArrayCollection();
         }
 
     
@@ -152,4 +160,38 @@ use vending_machineBundle\Entity\machine;
         {
             return ['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN'];
         }
+
+    /**
+     * Add transaction
+     *
+     * @param \vending_machineBundle\Entity\Transactions $transaction
+     *
+     * @return User
+     */
+    public function addTransaction(\vending_machineBundle\Entity\Transactions $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \vending_machineBundle\Entity\Transactions $transaction
+     */
+    public function removeTransaction(\vending_machineBundle\Entity\Transactions $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
 }

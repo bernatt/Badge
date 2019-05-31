@@ -259,6 +259,7 @@ class employeeUserController extends Controller
         $userRepository = $em->getRepository('vending_machineBundle:User');
         $user = $userRepository->findOneById($userId);
 
+
         $user->addRole($role);
         $em->persist($user);
         $em->flush();
