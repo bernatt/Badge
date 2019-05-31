@@ -12,6 +12,7 @@
              <th>Adres Email</th>
              <th>Nr badga</th>
              <th>Dostępne środki</th>
+             <th>Ostatnie logowanie</th>
              <th>Rola</th>
              <th>Edytuj profil</th>
              <th>Doładuj zdalnie konto</th>
@@ -24,6 +25,7 @@
                  <td> {{  user.getEmail }} </td>
                  <td> {{  user.getBadgeNr }} </td>
                  <td> {{  user.getCash }} </td>
+                 <td> {{  user.getLastLogin.format('m-d') }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
                  <td>
