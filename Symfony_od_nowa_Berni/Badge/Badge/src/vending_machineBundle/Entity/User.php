@@ -9,6 +9,7 @@ use vending_machineBundle\Entity\machine;
     /**
     * @ORM\Entity
     * @ORM\Table(name="fos_user")
+     * @ORM\Entity(repositoryClass="vending_machineBundle\Repository\employeeRepository")
     */
 
     class User extends BaseUser
@@ -30,7 +31,7 @@ use vending_machineBundle\Entity\machine;
         private $badgeNr;
 
         /**
-         * @var string
+         * @var float
          *
          * @ORM\Column(name="cash", type="decimal", precision=10, scale=2)
          */
@@ -39,14 +40,14 @@ use vending_machineBundle\Entity\machine;
         /**
          * @var string
          *
-         * @ORM\Column(name="history", type="string", nullable=true)
+         * @ORM\Column(name="history", type="text", nullable=true)
          */
         private $history;
 
 
-
         public function __construct()
         {
+
             parent::__construct();
         }
 
@@ -124,7 +125,7 @@ use vending_machineBundle\Entity\machine;
     }
 
 
-        public function deposit($amount)
+        public function deposit( $amount)
         {
             $this->cash = $this->cash + $amount;
             return $this;
@@ -145,5 +146,10 @@ use vending_machineBundle\Entity\machine;
         public function clearHistory()
         {
             $this->history = '';
+        }
+
+        public static function hereRoles()
+        {
+            return ['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN'];
         }
 }

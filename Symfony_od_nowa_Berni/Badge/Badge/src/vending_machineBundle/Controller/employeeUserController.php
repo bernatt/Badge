@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-//use vending_machineBundle\Entity\employee;
+use vending_machineBundle\Entity\User;
 use vending_machineBundle\Form\employeeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -87,9 +87,11 @@ class employeeUserController extends Controller
         $repository = $entityManager->getRepository('vending_machineBundle:User');
 
         $users = $repository->findAll();
+        $roles = User::hereRoles();
 
         return[
-            'users' => $users
+            'users' => $users,
+            'roles' => $roles
         ];
     }
 
@@ -243,6 +245,26 @@ class employeeUserController extends Controller
         $em->flush();
 
         return $this->redirect('/showHistory');
+    }
+
+    /**
+     * @Route("/addRole/{userId}", name="addrole")
+     */
+
+    public function addRoleAction(Request $request, $userId)
+    {
+        $role = $request->request->get('role');
+
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $user = $userRepository->findOneById($userId);
+
+        $user->addRole($role);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('showemployees');
+
     }
 
 }

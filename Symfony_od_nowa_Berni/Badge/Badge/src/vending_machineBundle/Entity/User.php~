@@ -39,9 +39,14 @@ use vending_machineBundle\Entity\machine;
         /**
          * @var string
          *
-         * @ORM\Column(name="history", type="string")
+         * @ORM\Column(name="history", type="string", nullable=true)
          */
-        private $history = [];
+        private $history;
+
+        /**
+         * @var array
+         */
+        private $role;
 
 
 
@@ -99,16 +104,51 @@ use vending_machineBundle\Entity\machine;
         return $this->badgeNr;
     }
 
-    public function deposit($amount)
+    /**
+     * Set history
+     *
+     * @param string $history
+     *
+     * @return User
+     */
+    public function setHistory($history)
     {
-        $this->cash = $this->cash + $amount;
+        $this->history = $history;
+
         return $this;
     }
 
-    public function buyFromMachine($price)
+    /**
+     * Get history
+     *
+     * @return string
+     */
+    public function getHistory()
     {
-        $this->cash = $this->cash - $price;
-        return $this;
+        return $this->history;
     }
 
+
+        public function deposit($amount)
+        {
+            $this->cash = $this->cash + $amount;
+            return $this;
+        }
+
+        public function buyFromMachine($price)
+        {
+            $this->cash = $this->cash - $price;
+            return $this;
+        }
+
+        public function addToHistory($history)
+        {
+            $this->history .= $history;
+            return $this;
+        }
+
+        public function clearHistory()
+        {
+            $this->history = '';
+        }
 }

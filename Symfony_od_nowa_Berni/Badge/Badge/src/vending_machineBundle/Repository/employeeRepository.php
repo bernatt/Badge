@@ -10,4 +10,5 @@ namespace vending_machineBundle\Repository;
  */
 class employeeRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

@@ -12,8 +12,10 @@
              <th>Adres Email</th>
              <th>Nr badga</th>
              <th>Dostępne środki</th>
+             <th>Rola</th>
              <th>Edytuj profil</th>
              <th>Doładuj zdalnie konto</th>
+             {% if is_granted('ROLE_SUPER_ADMIN') %}<th>Nadaj rolę</th>{% endif %}
          </tr>
          {% for user in users %}
              <tr>
@@ -22,6 +24,7 @@
                  <td> {{  user.getEmail }} </td>
                  <td> {{  user.getBadgeNr }} </td>
                  <td> {{  user.getCash }} </td>
+                 <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
                  <td>
                      <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
@@ -29,7 +32,17 @@
                          <input type="submit" value="Doładuj">
                      </form>
                  </td>
+                 {% if is_granted('ROLE_SUPER_ADMIN') %} <td>
+                     <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
+                         <select  id="role"  name="role">
+                             {% for role in roles %}<option>{{ role }}</option>{% endfor %}
+                         <input type="submit" value="Nadaj rolę">
+                     </form>
+                 </td>{% endif %}
              </tr>
          {% endfor %}
      </table>
  {% endblock %}
+
+
+{# <td> {{  user.getLastLogin.format('Y-m-d H:i:s') }} </td> #}
