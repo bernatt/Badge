@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 
+
 class employeeUserController extends Controller
 {
 //    /**
@@ -261,6 +262,27 @@ class employeeUserController extends Controller
 
 
         $user->addRole($role);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('showemployees');
+
+    }
+
+    /**
+     * @Route("/removeRole/{userId}", name="removerole")
+     */
+
+    public function removeRoleAction(Request $request, $userId)
+    {
+        $role = $request->request->get('role');
+
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $user = $userRepository->findOneById($userId);
+
+
+        $user->removeRole($role);
         $em->persist($user);
         $em->flush();
 

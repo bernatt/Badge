@@ -158,7 +158,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
         public static function hereRoles()
         {
-            return ['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN'];
+            return ['ROLE_ADMIN', 'ROLE_BERNI'];
         }
 
     /**

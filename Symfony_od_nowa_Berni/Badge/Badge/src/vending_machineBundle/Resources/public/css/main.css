@@ -1,9 +1,9 @@
 table, th, td
 {
     border: 1px solid #bbbbbb;
-    border-radius: 4px;
+    border-radius: 5px;
     text-align: center;
-    padding: 3px;
+    padding: 1px;
     margin-left: auto;
     margin-right: auto;
     font-size: 18px;
@@ -26,9 +26,7 @@ input[type=submit]
 
 body
 {
-     /* background-color: #303030; */
     /* Background pattern from Toptal Subtle Patterns */
-   /* background-image: url("../img/dark-grey-terrazzo.png"); */
     background-image: url("../img/dark_wood.png");
     color: #ffffff;
     font-family: 'Lato', sans-serif;
@@ -94,7 +92,7 @@ a:hover
 .content
 {
     margin-top: 40px;
-    width: 1000px;
+    width: 1250px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;

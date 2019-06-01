@@ -22,7 +22,7 @@ class employeeType extends AbstractType
             ->add('email', EmailType::class, array('label' => 'Email'))
             ->add('username', null, array('label' => 'Login'))
             ->add('badgeNr', IntegerType::class, ['label' => 'Nr badga:'])
-            ->add('cash', NumberType::class, ['label' => 'Dostępne środki:'])
+            //->add('cash', NumberType::class, ['label' => 'Dostępne środki:'])
             ->add('save', SubmitType::class, ['label' => 'Dodaj użytkownika:']);
     }
 
