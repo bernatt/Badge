@@ -1,5 +1,10 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{# extends "@FOSUser/layout.html.twig" #}
+{% extends '@vending_machine/base.html.twig' %}
 
-{% block fos_user_content %}
+{% block title %} <title>Zaloguj się</title> {% endblock %}
+
+{% block header %} <h1> Zaloguj się ;)</h1> {% endblock %}
+
+{% block body %}
     {{ include('@FOSUser/Security/login_content.html.twig') }}
-{% endblock fos_user_content %}
+{% endblock %}

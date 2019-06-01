@@ -1,6 +1,9 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends '@vending_machine/base.html.twig' %}
 
-{% block fos_user_content %}
-    sssasdasdasdd
+{% block title %} <title>Edytuj profil</title> {% endblock %}
+
+{% block header %} <h1> Edytuj profil</h1> {% endblock %}
+
+{% block body %}
 {% include "@FOSUser/Profile/edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% endblock %}

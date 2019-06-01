@@ -1,6 +1,9 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{# extends "@FOSUser/layout.html.twig" #}
+{% extends '@vending_machine/base.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %} <h1>Ticket przyjęty do realizacji! </h1>{% endblock %}
 
 {% block fos_user_content %}
 <p>

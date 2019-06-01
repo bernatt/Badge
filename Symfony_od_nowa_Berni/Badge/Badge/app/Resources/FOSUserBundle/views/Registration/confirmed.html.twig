@@ -1,4 +1,7 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{# extends "@FOSUser/layout.html.twig" #}
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block header %} <h1>Witaj {{ user.username }}! </h1>{% endblock %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 

@@ -1,5 +1,10 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{# extends "@FOSUser/layout.html.twig" #}
+{% extends '@vending_machine/base.html.twig' %}
 
-{% block fos_user_content %}
+{% block title %} <title>Reset hasła</title> {% endblock %}
+
+{% block header %} <h1>Wyślij ticket na reset hasła </h1>{% endblock %}
+
+{% block body %}
 {% include "@FOSUser/Resetting/request_content.html.twig" %}
-{% endblock fos_user_content %}
+{% endblock %}

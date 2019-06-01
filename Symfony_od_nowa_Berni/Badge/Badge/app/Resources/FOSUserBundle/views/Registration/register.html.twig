@@ -1,5 +1,9 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{# extends "@FOSUser/layout.html.twig" #}
+{% extends '@vending_machine/base.html.twig' %}
 
-{% block fos_user_content %}
+{% block header %} <h1> Zarejestruj konto</h1> {% endblock %}
+
+{% block body %}
+    <p style="font-size: 23px;">Da Ci ono możliwość korzystania z licznych udogodnień opracowanych przez nasz zespół ;-)</p>
 {% include "@FOSUser/Registration/register_content.html.twig" %}
-{% endblock fos_user_content %}
+{% endblock %}
