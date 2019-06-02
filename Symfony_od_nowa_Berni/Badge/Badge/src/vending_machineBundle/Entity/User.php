@@ -39,6 +39,22 @@ use Doctrine\Common\Collections\ArrayCollection;
         private $cash = 0;
 
         /**
+         * @var float
+         *
+         * @ORM\Column(name="money_spent", type="decimal", precision=10, scale=2)
+         */
+        private $moneySpent = 0;
+
+        /**
+         * @var float
+         *
+         * @ORM\Column(name="discount", type="decimal", precision=2, scale=2)
+         */
+        private $discount = 0;
+
+
+
+        /**
          * @var string
          *
          * @ORM\Column(name="history", type="text", nullable=true)
@@ -193,5 +209,81 @@ use Doctrine\Common\Collections\ArrayCollection;
     public function getTransactions()
     {
         return $this->transactions;
+    }
+
+
+    /**
+     * Set moneySpent
+     *
+     * @param string $moneySpent
+     *
+     * @return User
+     */
+    public function setMoneySpent($moneySpent)
+    {
+        $this->moneySpent = $moneySpent;
+
+        return $this;
+    }
+
+    /**
+     * Get moneySpent
+     *
+     * @return string
+     */
+    public function getMoneySpent()
+    {
+        return $this->moneySpent;
+    }
+
+    public function spentMoneyAdd($shoping)
+    {
+        $this->moneySpent = $this->moneySpent +$shoping;
+    }
+
+    /**
+     * Set discount
+     *
+     * @param string $discount
+     *
+     * @return User
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    /**
+     * Get discount
+     *
+     * @return string
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    public function discountGive()
+    {
+        if ($this->moneySpent < 200){
+            $this->discount = 0;
+        }
+        elseif ($this->moneySpent >= 200 && $this->moneySpent <= 300){
+            $this->discount = 0.1;
+        }
+        elseif ($this->moneySpent > 300 && $this->moneySpent <= 500){
+            $this->discount = 0.15;
+        }
+        else{
+            $this->discount = 0.2;
+        }
+        return $this;
+    }
+
+    public function checkDiscount()
+    {
+        $this->discountGive();
     }
 }

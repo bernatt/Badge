@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '@vending_machine/base.html.twig' %}
 
 {% block body %}
     <h1>Transactions list</h1>
@@ -7,10 +7,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Productname</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Moneyleft</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Actions</th>
@@ -19,11 +17,10 @@
         <tbody>
         {% for transaction in transactions %}
             <tr>
-                <td><a href="{{ path('transactions_show', { 'id': transaction.id }) }}">{{ transaction.id }}</a></td>
-                <td>{{ transaction.productName }}</td>
+                <td><a href="{{ path('transactions_show', { 'id': transaction.id }) }}">Pokaż {{ transaction.id }}</a></td>
+
                 <td>{{ transaction.quantity }}</td>
                 <td>{{ transaction.price }}</td>
-                <td>{{ transaction.moneyLeft }}</td>
                 <td>{% if transaction.created %}{{ transaction.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if transaction.updated %}{{ transaction.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>

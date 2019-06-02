@@ -39,6 +39,22 @@ use Doctrine\Common\Collections\ArrayCollection;
         private $cash = 0;
 
         /**
+         * @var float
+         *
+         * @ORM\Column(name="money_spent", type="decimal", precision=10, scale=2)
+         */
+        private $moneySpent = 0;
+
+        /**
+         * @var float
+         *
+         * @ORM\Column(name="discount", type="decimal", precision=2, scale=2)
+         */
+        private $discount = 0;
+
+
+
+        /**
          * @var string
          *
          * @ORM\Column(name="history", type="text", nullable=true)
@@ -158,6 +174,70 @@ use Doctrine\Common\Collections\ArrayCollection;
 
         public static function hereRoles()
         {
-            return ['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN'];
+            return ['ROLE_ADMIN', 'ROLE_BERNI'];
         }
+
+    /**
+     * Add transaction
+     *
+     * @param \vending_machineBundle\Entity\Transactions $transaction
+     *
+     * @return User
+     */
+    public function addTransaction(\vending_machineBundle\Entity\Transactions $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \vending_machineBundle\Entity\Transactions $transaction
+     */
+    public function removeTransaction(\vending_machineBundle\Entity\Transactions $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+
+    /**
+     * Set moneySpent
+     *
+     * @param string $moneySpent
+     *
+     * @return User
+     */
+    public function setMoneySpent($moneySpent)
+    {
+        $this->moneySpent = $moneySpent;
+
+        return $this;
+    }
+
+    /**
+     * Get moneySpent
+     *
+     * @return string
+     */
+    public function getMoneySpent()
+    {
+        return $this->moneySpent;
+    }
+
+    public function spentMoneyAdd($shoping)
+    {
+        $this->moneySpent = $this->moneySpent +$shoping;
+    }
 }

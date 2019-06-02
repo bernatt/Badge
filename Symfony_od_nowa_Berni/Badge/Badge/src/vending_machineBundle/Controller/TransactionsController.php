@@ -47,7 +47,19 @@ class TransactionsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $userId = $this->getUser()->getId();
+            $userRepository = $em->getRepository('vending_machineBundle:User');
+            $user = $userRepository->findOneById($userId);
+
+            $user->buyFromMachine($transaction->getPrice() * $transaction->getQuantity());
+
+
+
+
+
             $em->persist($transaction);
+            $em->persist($user);
             $em->flush();
 
             return $this->redirectToRoute('transactions_show', array('id' => $transaction->getId()));
@@ -101,33 +113,6 @@ class TransactionsController extends Controller
     }
 
     /**
-     * @Route("/robto/", name="x")
-     */
-    public function xxxAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $userRepository = $em->getRepository('vending_machineBundle:User');
-        $machineRepository = $em->getRepository('vending_machineBundle:machine');
-        $user= $userRepository->findOneById(1);
-        $machine= $machineRepository->findAll();
-
-        $transaction = new Transactions();
-        $transaction->setUser($user);
-        $transaction->setMoneyLeft(15);
-        $transaction->setPrice(10);
-        $transaction->setQuantity(1);
-        $transaction->setProductName('sok');
-        $transaction->setMachine($machine[0]);
-
-
-        $em->persist($transaction);
-        $em->flush();
-
-        return new Response('ok pykło');
-
-    }
-
-    /**
      * Deletes a transaction entity.
      *
      * @Route("/del/{id}", name="transactions_delete")
@@ -161,6 +146,33 @@ class TransactionsController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("/robto/", name="x")
+     */
+    public function xxxAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $machineRepository = $em->getRepository('vending_machineBundle:machine');
+        $user= $userRepository->findOneById(1);
+        $machine= $machineRepository->findAll();
+
+        $transaction = new Transactions();
+        $transaction->setUser($user);
+        $transaction->setMoneyLeft(15);
+        $transaction->setPrice(10);
+        $transaction->setQuantity(1);
+        $transaction->setProductName('sok');
+        $transaction->setMachine($machine[0]);
+
+
+        $em->persist($transaction);
+        $em->flush();
+
+        return new Response('ok pykło');
+
     }
 
 

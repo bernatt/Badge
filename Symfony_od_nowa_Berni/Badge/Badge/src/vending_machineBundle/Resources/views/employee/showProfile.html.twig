@@ -11,7 +11,10 @@
              <th>Adres Email</th>
              <th>Nr badga</th>
              <th>Dostępne środki</th>
-             <th>Wpłać środki</th>
+             <th>Całkowite wydane środki</th>
+             <th>Nabyty upust</th>
+             <th>Uprawnienia</th>
+            {# <th>Wpłać środki</th> #}
          </tr>
 
 
@@ -20,12 +23,15 @@
                  <td> {{  user.getEmail }} </td>
                  <td> {{  user.getBadgeNr }} </td>
                  <td> {{  user.getCash }} </td>
-                 <td>
+                 <td> {{  user.getMoneySpent }} </td>
+                 <td> {{  user.getDiscount }} </td>
+                 <td> {% for role in user.roles %}{{ role }}<br>{% endfor %} </td>
+                {# <td>
                      <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
                          <input id="amount" type="number" step="1" min="1" name="amount">
                          <input type="submit" value="Wpłać">
                      </form>
-                 </td>
+                 </td> #}
              </tr>
 
      </table>

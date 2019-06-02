@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use vending_machineBundle\Entity\Transactions;
 use vending_machineBundle\Entity\User;
 use vending_machineBundle\Form\employeeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -131,7 +132,7 @@ class employeeUserController extends Controller
         $em->persist($employee);
         $em->flush();
 
-        return $this->redirect('/moneyBoost');
+        return $this->redirectToRoute('showprofile');
     }
 
     /**
@@ -180,9 +181,11 @@ class employeeUserController extends Controller
 
             return new Response('Brak wystarczającej ilośći produktów');
         }
+
         // Metoda odejmująca zakupioną ilość towaru od stocka
         $product->stockCorrection($quantity);
-        $price = $product->getPrice() * $quantity;
+        $priceBeforeDiscount = $product->getPrice() * $quantity;
+        $price = $priceBeforeDiscount - ($priceBeforeDiscount * $user->getDiscount());
 
         // Walidacja stanu gotówki kupującego z odesłaniem do szablonu informującego o kosztach zamówienia
         if ($user->getCash() < $price){
@@ -197,14 +200,53 @@ class employeeUserController extends Controller
         // Zapis do historii operacji
         $operationHistory = "Kupiłeś ".$quantity. " ".$product->getProductName().", zapłaciłeś ".$price.", na koncie pozostało ".$user->getCash().".  ";
         $user->addToHistory($operationHistory);
+        $user->spentMoneyAdd($price);
+
+
+
+        //Teorzenie wpisu w tabeli transactions
+        $transaction = new Transactions();
+        $transaction->setUser($user);
+        $transaction->setMachine($product);
+        $transaction->setQuantity($quantity);
+        $transaction->setPriceUnit($product->getPrice());
+        $transaction->setPriceTotal($price);
+        $transaction->setMoneyLeft($user->getCash());
+        $now = new \DateTime(date('Y-m-d H:i:s'));
+        $transaction->setCreated($now);
+        $transaction->setUserDiscount($user->getDiscount());
+
+        //Sprawdzam czy użytkownikowi można nadać rabat
+        $user->checkDiscount();
+
 
         $em = $this->getDoctrine()->getManager();
+        $em->persist($transaction);
         $em->persist($user);
         $em->persist($product);
-
         $em->flush();
 
         return $this->render('@vending_machine/employee/summaryOfPurchases.html.twig',['price' => $price,'user' => $user, 'product' => $product]);
+    }
+
+    /**
+     * @Route("/transactionHistory", name="transactionhistory")
+     * @Template("@vending_machine/employee/showTransactionHistory.html.twig")
+     */
+
+    public function transactionHistoryAction()
+    {
+        $userId = $this->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $transactionRepository = $em->getRepository('vending_machineBundle:Transactions');
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $user = $userRepository->findOneById($userId);
+        $transactions = $transactionRepository->findByUser($userId);
+
+        return[
+           'transactions' => $transactions,
+            'user' => $user
+        ];
     }
 
     /**

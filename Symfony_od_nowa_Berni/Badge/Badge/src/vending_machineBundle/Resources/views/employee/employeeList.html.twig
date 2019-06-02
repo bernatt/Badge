@@ -10,6 +10,10 @@
          {
              font-size: 18px;
          }
+         td > a
+         {
+             color: brown!important;
+         }
      </style>
      <table>
          <tr>
@@ -18,10 +22,12 @@
              <th>Adres Email</th>
              <th>Nr badga</th>
              <th>Dostępne środki</th>
+             <th>Wydane środki</th>
+             <th>Rabat</th>
              <th>Ostatnie logowanie</th>
              <th>Rola</th>
              <th>Edytuj profil</th>
-             <th>Doładuj zdalnie konto</th>
+            {# <th>Doładuj zdalnie konto</th> #}
              {% if is_granted('ROLE_BERNI') %}<th>Nadaj rolę</th>{% endif %}
              {% if is_granted('ROLE_BERNI') %}<th>Usuń rolę</th>{% endif %}
          </tr>
@@ -32,15 +38,17 @@
                  <td> {{  user.getEmail }} </td>
                  <td> {{  user.getBadgeNr }} </td>
                  <td> {{  user.getCash }} </td>
+                 <td> {{  user.getMoneySpent }} </td>
+                 <td> {{  user.getDiscount }} </td>
                  <td> {{  user.getLastLogin.format('d-m-Y') }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
-                 <td>
+               {#  <td>
                      <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
                         <input style="width: 100px;" id="amount" type="number" step="1" min="1" name="amount">
                          <input type="submit" value="Doładuj">
                      </form>
-                 </td>
+                 </td> #}
                  {% if is_granted('ROLE_BERNI') %} <td>
                      <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
                          <select  id="role"  name="role">

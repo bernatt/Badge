@@ -34,9 +34,16 @@ class Transactions extends baseDatetime
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
+     * @ORM\Column(name="price_unit", type="decimal", precision=5, scale=2)
      */
-    private $price;
+    private $priceUnit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price_total", type="decimal", precision=5, scale=2)
+     */
+    private $priceTotal;
 
     /**
      * @var string
@@ -44,6 +51,13 @@ class Transactions extends baseDatetime
      * @ORM\Column(name="money_left", type="decimal", precision=7, scale=2)
      */
     private $moneyLeft;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="user_discount", type="decimal", precision=2, scale=2)
+     */
+    private $userDiscount = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="transactions")
@@ -116,30 +130,6 @@ class Transactions extends baseDatetime
     public function getQuantity()
     {
         return $this->quantity;
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Transactions
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
@@ -260,5 +250,53 @@ class Transactions extends baseDatetime
     public function getMachine()
     {
         return $this->machine;
+    }
+
+    /**
+     * Set priceUnit
+     *
+     * @param string $priceUnit
+     *
+     * @return Transactions
+     */
+    public function setPriceUnit($priceUnit)
+    {
+        $this->priceUnit = $priceUnit;
+
+        return $this;
+    }
+
+    /**
+     * Get priceUnit
+     *
+     * @return string
+     */
+    public function getPriceUnit()
+    {
+        return $this->priceUnit;
+    }
+
+    /**
+     * Set priceTotal
+     *
+     * @param string $priceTotal
+     *
+     * @return Transactions
+     */
+    public function setPriceTotal($priceTotal)
+    {
+        $this->priceTotal = $priceTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get priceTotal
+     *
+     * @return string
+     */
+    public function getPriceTotal()
+    {
+        return $this->priceTotal;
     }
 }
