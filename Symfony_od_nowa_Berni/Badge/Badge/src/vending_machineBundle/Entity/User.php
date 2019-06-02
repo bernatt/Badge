@@ -276,8 +276,11 @@ use Doctrine\Common\Collections\ArrayCollection;
         elseif ($this->moneySpent > 300 && $this->moneySpent <= 500){
             $this->discount = 0.15;
         }
-        else{
+        elseif ($this->moneySpent > 500 && $this->moneySpent <= 1000){
             $this->discount = 0.2;
+        }
+        else{
+            $this->discount = 0.25;
         }
         return $this;
     }

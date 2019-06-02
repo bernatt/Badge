@@ -17,36 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class employeeUserController extends Controller
 {
-//    /**
-//     * @Route("/newEmployee" , name="newemployee", methods="GET")
-//     * @Route("/newEmployee" , name="createmployee", methods="POST")
-//     * @Template("@vending_machine/employee/addForm.html.twig")
-//     */
-//
-//    public function newEmployeeAction(Request $request)
-//    {
-//        if ($request->isMethod('GET')) {
-//            $employee = new employee();
-//            $form = $this->createForm(employeeType::class, $employee, [
-//                'action' => $this->generateUrl('createmployee')
-//            ]);
-//            return ['form' => $form->createView()];
-//        }
-//
-//        $createEmployee = new employee();
-//        $form = $this->createForm(employeeType::class, $createEmployee);
-//
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $createUser = $form->getData();
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($createUser);
-//            $em->flush();
-//        }
-//        return $this->redirect('/showEmployees');
-//    }
-//
     /**
      * @Route("/{id}/modifyEmployee" , name="editemployee")
      * @Template("@vending_machine/employee/modifyEmployee.html.twig")
@@ -202,8 +172,6 @@ class employeeUserController extends Controller
         $user->addToHistory($operationHistory);
         $user->spentMoneyAdd($price);
 
-
-
         //Teorzenie wpisu w tabeli transactions
         $transaction = new Transactions();
         $transaction->setUser($user);
@@ -239,13 +207,10 @@ class employeeUserController extends Controller
         $userId = $this->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
         $transactionRepository = $em->getRepository('vending_machineBundle:Transactions');
-        $userRepository = $em->getRepository('vending_machineBundle:User');
-        $user = $userRepository->findOneById($userId);
         $transactions = $transactionRepository->findByUser($userId);
 
         return[
-           'transactions' => $transactions,
-            'user' => $user
+           'transactions' => $transactions
         ];
     }
 
@@ -308,7 +273,6 @@ class employeeUserController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('showemployees');
-
     }
 
     /**
@@ -329,7 +293,5 @@ class employeeUserController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('showemployees');
-
     }
-
 }
