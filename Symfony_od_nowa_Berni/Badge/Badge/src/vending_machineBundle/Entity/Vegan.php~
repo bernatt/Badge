@@ -38,21 +38,21 @@ class Vegan
     /**
      * @var int
      *
-     * @ORM\Column(name="sumOfPoints", type="integer", nullable=true)
+     * @ORM\Column(name="sumOfPoints", type="integer")
      */
     private $sumOfPoints;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="numberOfVoters", type="integer", nullable=true)
+     * @ORM\Column(name="numberOfVoters", type="integer")
      */
     private $numberOfVoters;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2, nullable=true)
+     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2)
      */
     private $rating;
 
@@ -192,28 +192,5 @@ class Vegan
     {
         return $this->rating;
     }
-
-    /**
-     * Set canteen
-     *
-     * @param \vending_machineBundle\Entity\Canteen $canteen
-     *
-     * @return Vegan
-     */
-    public function setCanteen(\vending_machineBundle\Entity\Canteen $canteen = null)
-    {
-        $this->canteen = $canteen;
-
-        return $this;
-    }
-
-    /**
-     * Get canteen
-     *
-     * @return \vending_machineBundle\Entity\Canteen
-     */
-    public function getCanteen()
-    {
-        return $this->canteen;
-    }
 }
+

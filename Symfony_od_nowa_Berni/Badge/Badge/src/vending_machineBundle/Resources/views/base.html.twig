@@ -54,6 +54,8 @@
                         <ul>
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newservice') }}"> Dodaj rodzaj posiłku </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showservice') }}"> Rodzaje posiłków </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newvegan') }}"> Dodaj Vege </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showvegan') }}"> Menu Vege </a></li>{% endif %}
                         </ul>
                     </li>
                     <li><a href="#">Historia</a>

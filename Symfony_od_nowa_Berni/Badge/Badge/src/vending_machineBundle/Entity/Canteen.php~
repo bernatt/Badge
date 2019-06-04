@@ -3,6 +3,7 @@
 namespace vending_machineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Canteen
@@ -33,7 +34,7 @@ class Canteen
      *
      * @ORM\Column(name="earnedCash", type="decimal", precision=10, scale=2)
      */
-    private $earnedCash;
+    private $earnedCash = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="typesOfservices", inversedBy="canteen")
@@ -41,6 +42,29 @@ class Canteen
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Vegan", mappedBy="canteen")
+     */
+    private $vegan;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Meat", mappedBy="canteen")
+     */
+    private $meat;
+
+    /**
+     * Canteen constructor.
+     */
+    public function __construct()
+    {
+        $this->vegan = new ArrayCollection();
+        $this->meat = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->kindOfMeal;
+    }
 
     /**
      * Get id
@@ -99,5 +123,28 @@ class Canteen
     {
         return $this->earnedCash;
     }
-}
 
+    /**
+     * Set type
+     *
+     * @param \vending_machineBundle\Entity\typesOfservices $type
+     *
+     * @return Canteen
+     */
+    public function setType(\vending_machineBundle\Entity\typesOfservices $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \vending_machineBundle\Entity\typesOfservices
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+}

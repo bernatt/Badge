@@ -5,12 +5,12 @@ namespace vending_machineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Vegan
+ * Meat
  *
- * @ORM\Table(name="vegan")
- * @ORM\Entity(repositoryClass="vending_machineBundle\Repository\VeganRepository")
+ * @ORM\Table(name="meat")
+ * @ORM\Entity(repositoryClass="vending_machineBundle\Repository\MeatRepository")
  */
-class Vegan
+class Meat
 {
     /**
      * @var int
@@ -38,26 +38,26 @@ class Vegan
     /**
      * @var int
      *
-     * @ORM\Column(name="sumOfPoints", type="integer", nullable=true)
+     * @ORM\Column(name="sumOfPoints", type="integer")
      */
     private $sumOfPoints;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="numberOfVoters", type="integer", nullable=true)
+     * @ORM\Column(name="numberOfVoters", type="integer")
      */
     private $numberOfVoters;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2, nullable=true)
+     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2)
      */
     private $rating;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Canteen", inversedBy="vegan")
+     * @ORM\ManyToOne(targetEntity="Canteen", inversedBy="meat")
      * @ORM\JoinColumn(name="kindOfmeal_id", referencedColumnName="id")
      */
     private $canteen;
@@ -78,7 +78,7 @@ class Vegan
      *
      * @param string $day
      *
-     * @return Vegan
+     * @return Meat
      */
     public function setDay($day)
     {
@@ -102,7 +102,7 @@ class Vegan
      *
      * @param string $dish
      *
-     * @return Vegan
+     * @return Meat
      */
     public function setDish($dish)
     {
@@ -126,7 +126,7 @@ class Vegan
      *
      * @param integer $sumOfPoints
      *
-     * @return Vegan
+     * @return Meat
      */
     public function setSumOfPoints($sumOfPoints)
     {
@@ -150,7 +150,7 @@ class Vegan
      *
      * @param integer $numberOfVoters
      *
-     * @return Vegan
+     * @return Meat
      */
     public function setNumberOfVoters($numberOfVoters)
     {
@@ -174,7 +174,7 @@ class Vegan
      *
      * @param string $rating
      *
-     * @return Vegan
+     * @return Meat
      */
     public function setRating($rating)
     {
@@ -192,28 +192,5 @@ class Vegan
     {
         return $this->rating;
     }
-
-    /**
-     * Set canteen
-     *
-     * @param \vending_machineBundle\Entity\Canteen $canteen
-     *
-     * @return Vegan
-     */
-    public function setCanteen(\vending_machineBundle\Entity\Canteen $canteen = null)
-    {
-        $this->canteen = $canteen;
-
-        return $this;
-    }
-
-    /**
-     * Get canteen
-     *
-     * @return \vending_machineBundle\Entity\Canteen
-     */
-    public function getCanteen()
-    {
-        return $this->canteen;
-    }
 }
+

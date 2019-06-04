@@ -4,11 +4,11 @@ namespace vending_machineBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CanteenType extends AbstractType
+class VeganType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,9 +16,10 @@ class CanteenType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('kindOfMeal', TextType::class, ['label' => 'Rodzaj posiłku'])
-            ->add('type')
-            ->add('save', SubmitType::class, ['label' => 'Dodaj']);
+            ->add('day', TextType::class, ['label' => 'Dzień tygodnia'])
+            ->add('dish',TextType::class, ['label' => 'Opis dania'])
+            ->add('canteen')
+            ->add('save', SubmitType::class, ['label' => 'Dodaj danie']);
     }
 
     /**
@@ -27,7 +28,7 @@ class CanteenType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'vending_machineBundle\Entity\Canteen'
+            'data_class' => 'vending_machineBundle\Entity\Vegan'
         ));
     }
 
@@ -36,7 +37,7 @@ class CanteenType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'vending_machinebundle_canteen';
+        return 'vending_machinebundle_vegan';
     }
 
 

@@ -19,7 +19,7 @@ use vending_machineBundle\Form\CanteenType;
 class CanteenController extends Controller
 {
     /**
-     * Część zajmująca się dodwaniem/edycją rodzajów serwowanych przez stołówkę dań
+     * Kontroler zajmujący się dodwaniem/edycją rodzajów serwowanych przez stołówkę dań
      */
 
     /**

@@ -56,6 +56,12 @@ class Meat
      */
     private $rating;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Canteen", inversedBy="meat")
+     * @ORM\JoinColumn(name="kindOfmeal_id", referencedColumnName="id")
+     */
+    private $canteen;
+
 
     /**
      * Get id
@@ -186,5 +192,28 @@ class Meat
     {
         return $this->rating;
     }
-}
 
+    /**
+     * Set canteen
+     *
+     * @param \vending_machineBundle\Entity\Canteen $canteen
+     *
+     * @return Meat
+     */
+    public function setCanteen(\vending_machineBundle\Entity\Canteen $canteen = null)
+    {
+        $this->canteen = $canteen;
+
+        return $this;
+    }
+
+    /**
+     * Get canteen
+     *
+     * @return \vending_machineBundle\Entity\Canteen
+     */
+    public function getCanteen()
+    {
+        return $this->canteen;
+    }
+}

@@ -3,6 +3,7 @@
 namespace vending_machineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Canteen
@@ -41,6 +42,29 @@ class Canteen
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Vegan", mappedBy="canteen")
+     */
+    private $vegan;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Meat", mappedBy="canteen")
+     */
+    private $meat;
+
+    /**
+     * Canteen constructor.
+     */
+    public function __construct()
+    {
+        $this->vegan = new ArrayCollection();
+        $this->meat = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->kindOfMeal;
+    }
 
     /**
      * Get id
@@ -122,5 +146,73 @@ class Canteen
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add vegan
+     *
+     * @param \vending_machineBundle\Entity\Vegan $vegan
+     *
+     * @return Canteen
+     */
+    public function addVegan(\vending_machineBundle\Entity\Vegan $vegan)
+    {
+        $this->vegan[] = $vegan;
+
+        return $this;
+    }
+
+    /**
+     * Remove vegan
+     *
+     * @param \vending_machineBundle\Entity\Vegan $vegan
+     */
+    public function removeVegan(\vending_machineBundle\Entity\Vegan $vegan)
+    {
+        $this->vegan->removeElement($vegan);
+    }
+
+    /**
+     * Get vegan
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVegan()
+    {
+        return $this->vegan;
+    }
+
+    /**
+     * Add meat
+     *
+     * @param \vending_machineBundle\Entity\Meat $meat
+     *
+     * @return Canteen
+     */
+    public function addMeat(\vending_machineBundle\Entity\Meat $meat)
+    {
+        $this->meat[] = $meat;
+
+        return $this;
+    }
+
+    /**
+     * Remove meat
+     *
+     * @param \vending_machineBundle\Entity\Meat $meat
+     */
+    public function removeMeat(\vending_machineBundle\Entity\Meat $meat)
+    {
+        $this->meat->removeElement($meat);
+    }
+
+    /**
+     * Get meat
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeat()
+    {
+        return $this->meat;
     }
 }

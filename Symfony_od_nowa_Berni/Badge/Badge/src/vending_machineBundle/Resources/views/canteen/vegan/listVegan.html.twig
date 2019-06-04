@@ -1,0 +1,18 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Dania Vege</title> {% endblock %}
+
+{% block header %} <h1 style="margin-bottom: 70px;">Menu dań wegetariańskich na najbliższy tydzień: </h1>{% endblock %}
+
+    {% block body %}
+
+        <ul class="vegan">
+
+            {% for vege in vegan %}
+                <span>{{ vege.getDay }}</span>
+                <li>
+                    {{ vege.getDish }}
+            </li>{% endfor %}
+        </ul>
+
+    {% endblock %}
