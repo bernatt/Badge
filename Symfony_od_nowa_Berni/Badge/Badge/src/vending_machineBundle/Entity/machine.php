@@ -44,14 +44,16 @@ class machine
      */
     private $stock;
 
+
     /**
      * @ORM\OneToMany(targetEntity="Transactions", mappedBy="machine")
      */
     private $transactions;
 
+
+
     public function __toString()
     {
-        // TODO: Implement __toString() method.
         return $this->productName;
 
     }

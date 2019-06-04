@@ -3,6 +3,7 @@
 namespace vending_machineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * typesOfservices
@@ -41,6 +42,16 @@ class typesOfservices
      * @ORM\Column(name="total_cash", type="decimal", precision=10, scale=2)
      */
     private $totalCash;
+
+    /**
+     * @ORM\OneToMany(targetEntity="machine", mappedBy="types")
+     */
+    private $machine;
+
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
 
 
     /**
