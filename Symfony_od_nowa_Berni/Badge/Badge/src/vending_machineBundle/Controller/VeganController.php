@@ -29,7 +29,7 @@ class VeganController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
 
-    public function newService(Request $request)
+    public function newVeganAction(Request $request)
     {
         if ($request->isMethod('GET')) {
             $newVegan = new Vegan();
@@ -59,7 +59,7 @@ class VeganController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
 
-    public function modifyItemAction(Request $request, $id)
+    public function modifyVeganAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('vending_machineBundle:Vegan');
@@ -85,7 +85,7 @@ class VeganController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
 
-    public function availableGoodsAdminAction()
+    public function veganListAction()
     {
         $entityManager = $this->getDoctrine()->getManager();
         $veganRepository = $entityManager->getRepository('vending_machineBundle:Vegan');

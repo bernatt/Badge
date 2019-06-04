@@ -24,19 +24,36 @@ input[type=submit]
     background-color: #FFFFFF;
 }
 
-ul.vegan > span
+ul.dish > span
 {
     color: #66dd66;
     font-size: 24px;
     letter-spacing: 3px;
 }
-ul.vegan > li
+ul.dish > li
 {
     list-style-type: none;
     color: red;
     margin-top: 5px;
     margin-bottom: 30px;
     font-size: 18px;
+}
+
+ul.menuu
+{
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+ul.menuu > li {
+    list-style-type: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    letter-spacing: normal;
+    text-align: left;
+    margin-left: 300px;
 }
 
 body

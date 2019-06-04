@@ -59,7 +59,7 @@ class CanteenController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
 
-    public function modifyItemAction(Request $request, $id)
+    public function modifyServiceAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('vending_machineBundle:Canteen');
@@ -85,7 +85,7 @@ class CanteenController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
 
-    public function availableGoodsAdminAction()
+    public function serviceListAction()
     {
         $entityManager = $this->getDoctrine()->getManager();
         $canteenRepository = $entityManager->getRepository('vending_machineBundle:Canteen');
@@ -94,6 +94,28 @@ class CanteenController extends Controller
 
         return[
             'meals' => $canteen,
+        ];
+    }
+
+    /**
+     * @Route("/weeklyMenu", name="weeklymenu")
+     * @Template("@vending_machine/canteen/weeklyMenu.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function weeklyMenuAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $veganRepository = $em->getRepository('vending_machineBundle:Vegan');
+        $vegan = $veganRepository->findAll();
+
+        $meatRepository = $em->getRepository('vending_machineBundle:Meat');
+        $meat = $meatRepository->findAll();
+
+        return[
+            'vegan' => $vegan,
+            'meat' => $meat,
+            'n' => 6
         ];
     }
 

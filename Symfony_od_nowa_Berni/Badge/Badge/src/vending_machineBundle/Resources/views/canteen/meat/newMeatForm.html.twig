@@ -1,0 +1,11 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Dodaj Mięcho</title> {% endblock %}
+
+{% block header %} <h1> Dodaj nowe danie mięsne </h1>{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -38,21 +38,21 @@ class Meat
     /**
      * @var int
      *
-     * @ORM\Column(name="sumOfPoints", type="integer")
+     * @ORM\Column(name="sumOfPoints", type="integer", nullable=true)
      */
     private $sumOfPoints;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="numberOfVoters", type="integer")
+     * @ORM\Column(name="numberOfVoters", type="integer", nullable=true)
      */
     private $numberOfVoters;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2)
+     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2, nullable=true)
      */
     private $rating;
 
