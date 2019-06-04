@@ -50,7 +50,12 @@
                             {% if is_granted('ROLE_USER') %} <li><a href="{{ path('stockInMachineUser') }}"> Kup produkt </a></li>{% endif %}
                         </ul>
                     </li>
-                    <li><a href="#">Stołówka</a></li>
+                    <li><a href="#">Stołówka</a>
+                        <ul>
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newservice') }}"> Dodaj rodzaj posiłku </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showservice') }}"> Rodzaje posiłków </a></li>{% endif %}
+                        </ul>
+                    </li>
                     <li><a href="#">Historia</a>
                         <ul>
                             {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showhistory') }}"> Zobacz historię zakupów </a></li>{% endif %}

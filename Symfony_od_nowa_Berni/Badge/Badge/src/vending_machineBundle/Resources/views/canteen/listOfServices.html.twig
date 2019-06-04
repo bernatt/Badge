@@ -1,0 +1,40 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Stołówka</title> {% endblock %}
+
+{% block header %} <h1>Dostępne rodzaje posiłków: </h1>{% endblock %}
+
+    {% block body %}
+       {# <table>
+            <tr>
+                <th>ID</th>
+                <th>Rodzaj posiłku</th>
+                <th>Edycja</th>
+            </tr>
+
+            {% for meal in meals %}
+                <tr>
+                    <td> {{ meal.getId }} </td>
+                    <td> {{ meal.getKindOfMeal }} </td>
+                    <td> <a href="{{ path('editservice', {'id' : meal.getId}) }}">Edytuj</a> </td>
+                </tr>
+            {% endfor %}
+        </table>
+        #}
+    <style>
+        ul > li
+        {
+            list-style-type: none;
+        }
+    </style>
+
+        <ul>
+            <h2>Kliknij by edytowac</h2>
+            {% for meal in meals %} <li><a href="{{ path('editservice', {'id' : meal.getId}) }}">{{ meal.getKindOfMeal }}</a></li>{% endfor %}
+        </ul>
+
+    {% endblock %}
+
+
+
+

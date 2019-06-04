@@ -140,8 +140,15 @@ class employeeUserController extends Controller
         $userRepository = $em->getRepository('vending_machineBundle:User');
         $user = $userRepository->find($user_id);
 
-        $userRepository = $em->getRepository('vending_machineBundle:machine');
-        $product = $userRepository->find($product_id);
+        $productRepository = $em->getRepository('vending_machineBundle:machine');
+        $product = $productRepository->find($product_id);
+
+        $distributorRepository = $em->getRepository('vending_machineBundle:Distributor');
+        $distributor = $distributorRepository->findOneById(1);
+
+        $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
+        $generalService = $generalServiceRepository->findOneById(1);
+
 
         // Pobieram z formularza wartość quantity
         $quantity = $request->request->get('quantity');
@@ -186,12 +193,19 @@ class employeeUserController extends Controller
 
         //Sprawdzam czy użytkownikowi można nadać rabat
         $user->checkDiscount();
+        //Wpłacam pieniądze użytkownika na konto Automatu sprzedażowego
+        $distributor->addMoney($price);
+        //Linkuję pieniądze automatu do tabeli typesOfservices
+        $generalService->cashFromService($price);
+
 
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($transaction);
         $em->persist($user);
         $em->persist($product);
+        $em->persist($distributor);
+        $em->persist($generalService);
         $em->flush();
 
         return $this->render('@vending_machine/employee/summaryOfPurchases.html.twig',['price' => $price,'user' => $user, 'product' => $product]);

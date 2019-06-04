@@ -30,7 +30,7 @@ class typesOfservices
     private $name;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(name="cash", type="decimal", precision=10, scale=2)
      */
@@ -60,10 +60,8 @@ class typesOfservices
         $this->canteen = new ArrayCollection();
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
+
+
 
     /**
      * Get id
@@ -213,10 +211,5 @@ class typesOfservices
     public function getCanteen()
     {
         return $this->canteen;
-    }
-
-    public function cashFromService($amount)
-    {
-        $this->cash = $this->cash + $amount;
     }
 }

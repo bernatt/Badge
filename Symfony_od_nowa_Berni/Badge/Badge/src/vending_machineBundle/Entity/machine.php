@@ -4,7 +4,7 @@ namespace vending_machineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * machine
@@ -31,7 +31,11 @@ class machine
     private $productName;
 
     /**
-     * @var string
+     * @var int
+     *@Assert\GreaterThan(
+     *      value = 0,
+     *      message = "Pole musi zawierać wartość liczbową"
+     * )
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
      */

@@ -19,7 +19,7 @@ class machineController extends Controller
      * @Route("/newItem" , name="newItem", methods="GET")
      * @Route("/newItem" , name="createItem", methods="POST")
      * @Template("@vending_machine/machine/addGoodsToMachine.html.twig")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
     public function newItemAction(Request $request)
