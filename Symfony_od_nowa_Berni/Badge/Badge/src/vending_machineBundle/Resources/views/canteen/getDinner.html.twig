@@ -1,0 +1,24 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Obiadek</title> {% endblock %}
+
+{% block header %} <h1>Na co masz dziś ochotę ? </h1>{% endblock %}
+
+    {% block body %}
+
+    <div class="canteenPriceList">
+        <p style="font-size: 22px;">Ceny obiadu w zależności od koloru badga:</p>
+        <p><span style="color: #0088CC">Niebieski: 1 zł</span></p>
+        <p><span style="color: green">Zielony: 2 zł</span></p>
+        <p><span style="color: yellow">Żółty: 10 zł</span></p>
+    </div>
+    <div class="canteenMealContainer">
+        <div class="canteenVege">
+            <i class="icon-emo-happy"></i>
+        </div>
+        <div class="canteenMeat">
+
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    {% endblock %}

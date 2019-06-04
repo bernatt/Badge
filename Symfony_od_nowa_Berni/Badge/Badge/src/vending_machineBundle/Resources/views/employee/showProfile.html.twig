@@ -13,6 +13,7 @@
              <th>Dostępne środki</th>
              <th>Całkowite wydane środki</th>
              <th>Nabyty upust</th>
+             <th>Kolor badga</th>
              <th>Uprawnienia</th>
             {# <th>Wpłać środki</th> #}
          </tr>
@@ -25,6 +26,7 @@
                  <td> {{  user.getCash }} </td>
                  <td> {{  user.getMoneySpent }} </td>
                  <td> {{  user.getDiscount }} </td>
+                 <td> {{  user.getBadgeColor }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %} </td>
                 {# <td>
                      <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">

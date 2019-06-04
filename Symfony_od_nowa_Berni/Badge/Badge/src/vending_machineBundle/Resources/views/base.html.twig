@@ -7,6 +7,7 @@
     <meta name="author" content="Berni">
 
     <link href="{{ asset('bundles/vending_machine/css/main.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('bundles/vending_machine/css/fontello/css/fontello.css') }}" type="text/css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 </head>
 <body>
@@ -52,13 +53,13 @@
                     </li>
                     <li><a href="#">Stołówka</a>
                         <ul>
-                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newservice') }}"> Dodaj rodzaj posiłku </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showservice') }}"> Rodzaje posiłków </a></li>{% endif %}
-                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newvegan') }}"> Dodaj vege </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newvegan') }}"> Dodaj danie vege </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newmeat') }}"> Dodaj danie mięsne </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showvegan') }}"> Menu vege </a></li>{% endif %}
-                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newmeat') }}"> Dodaj mięsne </a></li>{% endif %}
-                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showvegan') }}"> Menu mięsne </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showmeat') }}"> Menu mięsne </a></li>{% endif %}
                             {% if is_granted('ROLE_USER') %} <li><a href="{{ path('weeklymenu') }}"> Menu tygodniowe </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %} <li><a href="{{ path('getdinner') }}"> Pobierz obiadek </a></li>{% endif %}
                         </ul>
                     </li>
                     <li><a href="#">Historia</a>
@@ -82,24 +83,12 @@
 
             {% block body %}{% endblock %}
 
-            {# block fos_user_content %}{% endblock fos_user_content #}
         </div>
 
         <div class="footer">
 
         {% block footer %}
 
-        {#
-            <a href="{{ path('homepage') }}"> Strona startowa </a><br>
-            <a href="{{ path('stockInMachine') }}"> Zobacz listę dostępnych produktów </a><br>
-            <a href="{{ path('newItem') }}"> Dodaj przedmiot </a><br>
-            <a href="{{ path('fos_user_registration_register') }}"> Dodaj użytkownika </a><br>
-            <a href="{{ path('showemployees') }}"> Lista pracowników </a><br>
-            <a href="{{ path('fos_user_change_password') }}"> Zmień hasło </a><br>
-            <a href="{{ path('fos_user_resetting_request') }}"> Zresetuj hasło ( nie za bardzo działa - ogarnij ) </a><br>
-            <a href="{{ path('fos_user_profile_edit') }}"> Edytuj profil ( do usunięcia, pracownik nie może zmieniać danych) </a><br>
-
-            #}
         {% endblock %}
 
         </div>

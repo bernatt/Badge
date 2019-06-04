@@ -6,12 +6,24 @@
 
     {% block body %}
 
+        <style>
+            ul.dish > li > a
+            {
+                color: #6b9311;
+            }
+
+            ul.dish > li > a:hover
+            {
+                color: #5a8200;
+            }
+        </style>
+
         <ul class="dish">
 
             {% for vege in vegan %}
                 <span>{{ vege.getDay }}</span>
                 <li>
-                    {{ vege.getDish }}
+                <a href="{{ path('editvegan', {'id':vege.getId}) }}"> {{ vege.getDish }} </a>
             </li>{% endfor %}
         </ul>
 

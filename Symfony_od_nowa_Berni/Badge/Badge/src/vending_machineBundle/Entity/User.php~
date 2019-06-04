@@ -52,14 +52,19 @@ use Doctrine\Common\Collections\ArrayCollection;
          */
         private $discount = 0;
 
-
-
         /**
          * @var string
          *
          * @ORM\Column(name="history", type="text", nullable=true)
          */
         private $history;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="badgeColor", type="string", nullable=true)
+         */
+        private $badgeColor;
 
         /**
          * @ORM\OneToMany(targetEntity="Transactions", mappedBy="user")
@@ -239,5 +244,54 @@ use Doctrine\Common\Collections\ArrayCollection;
     public function spentMoneyAdd($shoping)
     {
         $this->moneySpent = $this->moneySpent +$shoping;
+    }
+
+    /**
+     * Set discount
+     *
+     * @param string $discount
+     *
+     * @return User
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    /**
+     * Get discount
+     *
+     * @return string
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    public function discountGive()
+    {
+        if ($this->moneySpent < 200){
+            $this->discount = 0;
+        }
+        elseif ($this->moneySpent >= 200 && $this->moneySpent <= 300){
+            $this->discount = 0.1;
+        }
+        elseif ($this->moneySpent > 300 && $this->moneySpent <= 500){
+            $this->discount = 0.15;
+        }
+        elseif ($this->moneySpent > 500 && $this->moneySpent <= 1000){
+            $this->discount = 0.2;
+        }
+        else{
+            $this->discount = 0.25;
+        }
+        return $this;
+    }
+
+    public function checkDiscount()
+    {
+        $this->discountGive();
     }
 }

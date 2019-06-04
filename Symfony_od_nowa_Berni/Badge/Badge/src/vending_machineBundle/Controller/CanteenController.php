@@ -119,4 +119,17 @@ class CanteenController extends Controller
         ];
     }
 
+    /**
+     * @Route("/getDinner", name="getdinner", methods="GET")
+     * @Template("@vending_machine/canteen/getDinner.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function getDinner(Request $request)
+    {
+        if ($request->isMethod('GET')){
+            return [];
+        }
+    }
+
 }

@@ -52,14 +52,19 @@ use Doctrine\Common\Collections\ArrayCollection;
          */
         private $discount = 0;
 
-
-
         /**
          * @var string
          *
          * @ORM\Column(name="history", type="text", nullable=true)
          */
         private $history;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="badgeColor", type="string")
+         */
+        private $badgeColor = 'żółty';
 
         /**
          * @ORM\OneToMany(targetEntity="Transactions", mappedBy="user")
@@ -288,5 +293,29 @@ use Doctrine\Common\Collections\ArrayCollection;
     public function checkDiscount()
     {
         $this->discountGive();
+    }
+
+    /**
+     * Set badgeColor
+     *
+     * @param string $badgeColor
+     *
+     * @return User
+     */
+    public function setBadgeColor($badgeColor)
+    {
+        $this->badgeColor = $badgeColor;
+
+        return $this;
+    }
+
+    /**
+     * Get badgeColor
+     *
+     * @return string
+     */
+    public function getBadgeColor()
+    {
+        return $this->badgeColor;
     }
 }

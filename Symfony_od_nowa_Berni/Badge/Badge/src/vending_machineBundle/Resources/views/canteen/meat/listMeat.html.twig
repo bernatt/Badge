@@ -11,7 +11,7 @@
             {% for m in meat %}
                 <span>{{ m.getDay }}</span>
                 <li>
-                {{ m.getDish }}
+                <a href="{{ path('editmeat', {'id':m.getId}) }}"> {{ m.getDish }}</a>
                 </li>{% endfor %}
         </ul>
 

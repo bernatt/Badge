@@ -1,0 +1,5 @@
+
+.icon-emo-happy:before { content: '\e800'; } /* '' */
+.icon-emo-unhappy:before { content: '\e802'; } /* '' */
+.icon-emo-angry:before { content: '\e80d'; } /* '' */
+.icon-emo-wink2:before { content: '\e813'; } /* '' */

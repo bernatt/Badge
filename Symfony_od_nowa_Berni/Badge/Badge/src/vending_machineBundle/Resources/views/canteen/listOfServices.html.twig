@@ -5,22 +5,7 @@
 {% block header %} <h1>Dostępne rodzaje posiłków: </h1>{% endblock %}
 
     {% block body %}
-       {# <table>
-            <tr>
-                <th>ID</th>
-                <th>Rodzaj posiłku</th>
-                <th>Edycja</th>
-            </tr>
 
-            {% for meal in meals %}
-                <tr>
-                    <td> {{ meal.getId }} </td>
-                    <td> {{ meal.getKindOfMeal }} </td>
-                    <td> <a href="{{ path('editservice', {'id' : meal.getId}) }}">Edytuj</a> </td>
-                </tr>
-            {% endfor %}
-        </table>
-        #}
     <style>
         ul > li
         {
@@ -29,9 +14,13 @@
     </style>
 
         <ul>
-            <h2>Kliknij by edytowac</h2>
+            <h3>Kliknij by edytowac</h3>
             {% for meal in meals %} <li><a href="{{ path('editservice', {'id' : meal.getId}) }}">{{ meal.getKindOfMeal }}</a></li>{% endfor %}
         </ul>
+
+        <div class="kindOfmeal">
+            <a href="{{ path('newservice') }}"> Dodaj nowy rodzaj</a>
+        </div>
 
     {% endblock %}
 
