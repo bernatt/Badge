@@ -52,7 +52,7 @@ class Vegan
     /**
      * @var string
      *
-     * @ORM\Column(name="rating", type="decimal", precision=2, scale=2, nullable=true)
+     * @ORM\Column(name="rating", type="float", nullable=true)
      */
     private $rating;
 
@@ -215,5 +215,23 @@ class Vegan
     public function getCanteen()
     {
         return $this->canteen;
+    }
+
+    public function addVoters()
+    {
+        $this->numberOfVoters = $this->numberOfVoters + 1;
+        return $this;
+    }
+
+    public function addRatePoint($rate)
+    {
+        $this->sumOfPoints = $this->sumOfPoints + $rate;
+        return $this;
+    }
+
+    public function calculateRating()
+    {
+        $this->rating = $this->sumOfPoints / $this->numberOfVoters;
+        return $this;
     }
 }

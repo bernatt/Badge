@@ -234,4 +234,32 @@ class Canteen
     {
         $this->earnedCash = $this->earnedCash + Canteen::costOfDinner($badgeColor);
     }
+
+    public static function dateTranslate($day)
+    {
+        if ($day == 1){
+            $curentDay = 'Poniedziałek';
+        }
+        elseif ($day == 2){
+            $curentDay = 'Wtorek';
+        }
+        elseif ($day == 3){
+            $curentDay = 'Środa';
+        }
+        elseif ($day == 4){
+            $curentDay = 'Czwartek';
+        }
+        elseif ($day == 5){
+            $curentDay = 'Piątek';
+        }
+        elseif ($day == 6){
+            $curentDay = 'Sobota';
+        }
+        else{
+            $curentDay = 'Niedziela';
+        }
+
+        return $curentDay;
+    }
+
 }

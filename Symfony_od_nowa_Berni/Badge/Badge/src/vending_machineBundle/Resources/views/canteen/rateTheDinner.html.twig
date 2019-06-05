@@ -7,17 +7,17 @@
 
     {% block body %}
         <div class="faces">
-            <div style="background-color: #FE0D0D;" class="face">
-                <a href="#"><i class="demo-icon icon-emo-angry"></i></a>
+            <div style="background-color: red;" class="face">
+                <a href="{{ path('rateddinner', {'rate':1}) }}"><i class="demo-icon icon-emo-angry"></i></a>
             </div>
             <div style="background-color: #ab0a0a;" class="face">
-                <a href="#"><i class="demo-icon icon-emo-unhappy"></i></a>
+                <a href="{{ path('rateddinner', {'rate':2}) }}"><i class="demo-icon icon-emo-unhappy"></i></a>
             </div>
             <div style="background-color: #157B1C;" class="face">
-                <a href="#"><i class="demo-icon icon-emo-happy"></i></a>
+                <a href="{{ path('rateddinner', {'rate':3}) }}"><i class="demo-icon icon-emo-happy"></i></a>
             </div>
             <div style="background-color: #74F213;" class="face">
-                <a href="#"><i class="demo-icon icon-emo-wink2"></i></a>
+                <a href="{{ path('rateddinner', {'rate':4}) }}"><i class="demo-icon icon-emo-wink2"></i></a>
             </div>
             <div style="clear: both"></div>
         </div>

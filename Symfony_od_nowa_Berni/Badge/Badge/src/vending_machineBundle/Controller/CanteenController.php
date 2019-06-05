@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use vending_machineBundle\Entity\Canteen;
 use vending_machineBundle\Form\CanteenType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class CanteenController
@@ -138,7 +139,7 @@ class CanteenController extends Controller
      * @Template("@vending_machine/employee/noEnoughMoney.html.twig")
      */
 
-    public function payForDinnerAction($meal)
+    public function payForDinnerAction(SessionInterface $session, $meal)
     {
         $userId = $this->getUser()->getId();
 
@@ -157,11 +158,13 @@ class CanteenController extends Controller
         if ($meal == 'wegetariańskie'){
             $dish = $mealRepository->findOneById(2);
             $dish->buyDinner($user->getBadgeColor());
+            $session->set('kindOfmeal', 'vegan');
         }
 
         else{
             $dish = $mealRepository->findOneById(3);
             $dish->buyDinner($user->getBadgeColor());
+            $session->set('kindOfmeal', 'meat');
         }
 
         $dinnerPrice = Canteen::costOfDinner($user->getBadgeColor());
@@ -194,11 +197,57 @@ class CanteenController extends Controller
     /**
      * @Route("/rateTheDinner", name="dinnerratings")
      * @Template("@vending_machine/canteen/rateTheDinner.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function rateDinnerAction()
     {
         return[];
+    }
+
+    /**
+     * @Route("/ratedDinner/{rate}", name="rateddinner")
+     * @Template("@vending_machine/canteen/thanksForVote.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function ratedDinnerAction(SessionInterface $session, $rate)
+    {
+        $userId = $this->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $user = $userRepository->find($userId);
+
+        $kindOfMeal = $session->get('kindOfmeal');
+
+        $dateTime = new \DateTime('now');
+        $day = $dateTime->format('N');
+        $curentDay = Canteen::dateTranslate($day);
+
+        if ($kindOfMeal == 'vegan'){
+            $veganRepository = $em->getRepository('vending_machineBundle:Vegan');
+            $meal = $veganRepository->findOneByDay($curentDay);
+        }
+        else{
+            $meatRepository = $em->getRepository('vending_machineBundle:Meat');
+            $meal = $meatRepository->findOneByDay($curentDay);
+        }
+
+        //Dodaję osobę do głosujących
+        $meal->addVoters();
+        //Dodaję podaną liczbę punktów z oceny posiłku
+        $meal->addRatePoint($rate);
+        //Aktualizuję rating
+        $meal->calculateRating();
+
+        $em->persist($meal);
+        $em->flush();
+        $session->remove('kindOfmeal');
+
+        return [
+            'user' => $user
+        ];
     }
 
 }
