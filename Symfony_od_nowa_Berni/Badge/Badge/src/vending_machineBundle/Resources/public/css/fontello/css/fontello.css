@@ -55,7 +55,7 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-emo-happy:before { content: '\e800'; } /* '' */
-.icon-emo-unhappy:before { content: '\e802'; } /* '' */
-.icon-emo-angry:before { content: '\e80d'; } /* '' */
-.icon-emo-wink2:before { content: '\e813'; } /* '' */
+.icon-emo-happy:before { content: '\e800'; font-size: 96px; margin-top: 80px;} /* '' */
+.icon-emo-unhappy:before { content: '\e802'; font-size: 96px; margin-top: 80px;} /* '' */
+.icon-emo-angry:before { content: '\e80d'; font-size: 96px; margin-top: 80px;} /* '' */
+.icon-emo-wink2:before { content: '\e813'; font-size: 96px; margin-top: 80px;} /* '' */

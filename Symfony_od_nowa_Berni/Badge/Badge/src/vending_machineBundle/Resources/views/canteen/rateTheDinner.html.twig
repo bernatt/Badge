@@ -1,0 +1,25 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Oceń obiad</title> {% endblock %}
+
+{% block header %} <h1>Hej, prosimy o ocenienie obiadku ;) </h1><p> Pamiętaj, Twoje zdanie ma znaczenie !</p>{% endblock %}
+
+
+    {% block body %}
+        <div class="faces">
+            <div style="background-color: #FE0D0D;" class="face">
+                <a href="#"><i class="demo-icon icon-emo-angry"></i></a>
+            </div>
+            <div style="background-color: #ab0a0a;" class="face">
+                <a href="#"><i class="demo-icon icon-emo-unhappy"></i></a>
+            </div>
+            <div style="background-color: #157B1C;" class="face">
+                <a href="#"><i class="demo-icon icon-emo-happy"></i></a>
+            </div>
+            <div style="background-color: #74F213;" class="face">
+                <a href="#"><i class="demo-icon icon-emo-wink2"></i></a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+
+    {% endblock %}

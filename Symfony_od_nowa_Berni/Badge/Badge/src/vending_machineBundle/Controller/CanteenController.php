@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 use vending_machineBundle\Entity\Canteen;
 use vending_machineBundle\Form\CanteenType;
 
@@ -125,11 +126,79 @@ class CanteenController extends Controller
      * @Security("has_role('ROLE_USER')")
      */
 
-    public function getDinner(Request $request)
+    public function getDinnerAction(Request $request)
     {
         if ($request->isMethod('GET')){
             return [];
         }
+    }
+
+    /**
+     * @Route("/payForDinner/{meal}", name="payfordinner")
+     * @Template("@vending_machine/employee/noEnoughMoney.html.twig")
+     */
+
+    public function payForDinnerAction($meal)
+    {
+        $userId = $this->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $user = $userRepository->find($userId);
+
+        $mealRepository = $em->getRepository('vending_machineBundle:Canteen');
+        // Pobieram repo general Canteen
+        $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
+        $generalService = $generalServiceRepository->findOneById(2);
+
+        //W zależności od tego jaki obiadek wybrał użytkownik dokonujemy transakcji
+        //Metoda buy dinner sprawdza jaką cenę ma zapłacić użytkownik na podstawie koloru badga
+
+        if ($meal == 'wegetariańskie'){
+            $dish = $mealRepository->findOneById(2);
+            $dish->buyDinner($user->getBadgeColor());
+        }
+
+        else{
+            $dish = $mealRepository->findOneById(3);
+            $dish->buyDinner($user->getBadgeColor());
+        }
+
+        $dinnerPrice = Canteen::costOfDinner($user->getBadgeColor());
+
+        //Linkuję pieniądze kantyny do tabeli typesOfservices
+        $generalService->cashFromService($dinnerPrice);
+
+        if ($user->getCash() < $dinnerPrice){
+
+            return [
+                'price' => $dinnerPrice,
+                'user' => $user
+            ];
+        }
+        $operationHistory = "Zjadłeś dziś danie ".$meal. ", zapłaciłeś ".$dinnerPrice.", na koncie pozostało ".$user->getCash().".  ";
+        $user->addToHistory($operationHistory);
+
+        $user->spentMoneyAdd($dinnerPrice);
+        $user->buyFromMachine($dinnerPrice); //buyFromCanteen;)
+        $user->checkDiscount();
+
+        $em->persist($dish);
+        $em->persist($generalService);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('dinnerratings');
+    }
+
+    /**
+     * @Route("/rateTheDinner", name="dinnerratings")
+     * @Template("@vending_machine/canteen/rateTheDinner.html.twig")
+     */
+
+    public function rateDinnerAction()
+    {
+        return[];
     }
 
 }

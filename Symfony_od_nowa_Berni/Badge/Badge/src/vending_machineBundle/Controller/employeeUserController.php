@@ -175,8 +175,8 @@ class employeeUserController extends Controller
         // Metoda pobierająca pieniądze z konta kupującego
         $user->buyFromMachine($price);
         // Zapis do historii operacji
-        $operationHistory = "Kupiłeś ".$quantity. " ".$product->getProductName().", zapłaciłeś ".$price.", na koncie pozostało ".$user->getCash().".  ";
-        $user->addToHistory($operationHistory);
+//        $operationHistory = "Kupiłeś ".$quantity. " ".$product->getProductName().", zapłaciłeś ".$price.", na koncie pozostało ".$user->getCash().".  ";
+//        $user->addToHistory($operationHistory);
         $user->spentMoneyAdd($price);
 
         //Teorzenie wpisu w tabeli transactions
@@ -192,15 +192,13 @@ class employeeUserController extends Controller
         $transaction->setUserDiscount($user->getDiscount());
 
         //Sprawdzam czy użytkownikowi można nadać rabat
-        $user->checkDiscount();
+
         //Wpłacam pieniądze użytkownika na konto Automatu sprzedażowego
         $distributor->addMoney($price);
         //Linkuję pieniądze automatu do tabeli typesOfservices
         $generalService->cashFromService($price);
 
 
-
-        $em = $this->getDoctrine()->getManager();
         $em->persist($transaction);
         $em->persist($user);
         $em->persist($product);

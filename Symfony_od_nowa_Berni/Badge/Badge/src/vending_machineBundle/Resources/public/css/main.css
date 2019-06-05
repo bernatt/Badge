@@ -92,6 +92,32 @@ a:hover
     float: left;
     width: 600px;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.salad
+{
+    position: relative;
+}
+
+.salad .link
+{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 65px;
+    color: #6b9311;
+    left: 0px;
+    bottom: 0px;
+    opacity: 0;
+    font-size: 28px;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.salad:hover .link
+{
+    opacity: 0.8;
 }
 
 .canteenMeat
@@ -99,6 +125,32 @@ a:hover
     float: left;
     width: 600px;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.burger
+{
+    position: relative;
+}
+
+.burger .link
+{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 65px;
+    color: red;
+    left: 0px;
+    bottom: 0px;
+    opacity: 0;
+    font-size: 28px;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.burger:hover .link
+{
+    opacity: 0.8;
 }
 
 .footer
@@ -133,6 +185,42 @@ a:hover
 .kindOfmeal > a:hover
 {
     color: saddlebrown;
+}
+
+.faces
+{
+    margin-top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+
+}
+
+.face
+{
+    float: left;
+    width: 250px;
+    height: 250px;
+    margin: 15px;
+    border-radius: 50%;
+    box-shadow: 5px -5px 5px #3F463A;
+    color: black;
+    transition: transform 0.5s ease-in-out;
+}
+
+.face:hover
+{
+    transform: scale(0.7);
+}
+
+.face:first-child
+{
+    margin-left: 70px;
+}
+
+.face > a
+{
+    color: black;
 }
 
 ol

@@ -11,13 +11,20 @@
         <p><span style="color: #0088CC">Niebieski: 1 zł</span></p>
         <p><span style="color: green">Zielony: 2 zł</span></p>
         <p><span style="color: yellow">Żółty: 10 zł</span></p>
+        <p style="font-size: 16px;">Na kantynie nie obowiązują rabaty</p>
     </div>
     <div class="canteenMealContainer">
-        <div class="canteenVege">
-            <i class="icon-emo-happy"></i>
+        <div class="canteenVege"> {#photo 3#}
+            <div class="salad">  {#overlay#}
+                <a href="{{ path('payfordinner', {'meal':'wegetariańskie'}) }}"><img src="{{ asset('bundles/vending_machine/img/salad3.png') }}"/></a>
+                <a class="link" href="{{ path('payfordinner', {'meal':'vege'}) }}"><p>Danie wegeteriańskie</p></a>
+            </div>
         </div>
         <div class="canteenMeat">
-
+            <div class="burger">
+                <a href="{{ path('payfordinner', {'meal':'mięsne'}) }}"><img src="{{ asset('bundles/vending_machine/img/burger2.png') }}"/></a>
+                <a class="link" href="{{ path('payfordinner', {'meal':'meat'}) }}"><p>Danie mięsne</p></a>
+            </div>
         </div>
         <div style="clear: both;"></div>
     </div>

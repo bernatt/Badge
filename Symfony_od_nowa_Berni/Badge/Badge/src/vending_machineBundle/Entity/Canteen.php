@@ -215,4 +215,23 @@ class Canteen
     {
         return $this->meat;
     }
+
+    public static function costOfDinner($badge_color)
+    {
+        if ($badge_color = 'niebieski'){
+            $price = 1;
+        }
+        elseif ($badge_color = 'zielony'){
+            $price = 2;
+        }
+        else{
+            $price = 10;
+        }
+        return $price;
+    }
+
+    public function buyDinner($badgeColor)
+    {
+        $this->earnedCash = $this->earnedCash + Canteen::costOfDinner($badgeColor);
+    }
 }
