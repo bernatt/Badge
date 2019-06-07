@@ -20,7 +20,7 @@
              <td> {{  transaction.getMachine }} </td>
              <td> {{  transaction.getPriceUnit }} </td>
              <td> {{  transaction.getQuantity }} </td>
-             <td> {{  transaction.getUserDiscount }} </td>
+             <td> {{  transaction.getUserDiscount * 100}}  % </td>
              <td> {{  transaction.getPriceTotal }} </td>
              <td> {{  transaction.getCreated.format('d-m-y | h:i:s') }} </td>
              <td> {{  transaction.getMoneyLeft }} </td>

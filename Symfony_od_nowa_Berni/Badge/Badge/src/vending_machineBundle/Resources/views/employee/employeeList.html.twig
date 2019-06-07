@@ -14,6 +14,10 @@
          {
              color: brown!important;
          }
+         .content
+         {
+            width: 1600px;
+         }
      </style>
      <table>
          <tr>
@@ -21,13 +25,12 @@
              <th>Login</th>
              <th>Adres Email</th>
              <th>Nr badga</th>
-             <th>Dostępne środki</th>
-             <th>Wydane środki</th>
+             <th>Dostępne </br>środki</th>
+             <th>Wydane</br> środki</th>
              <th>Rabat</th>
-             <th>Ostatnie logowanie</th>
+             <th>Ostatnie </br>logowanie</th>
              <th>Rola</th>
              <th>Edytuj profil</th>
-            {# <th>Doładuj zdalnie konto</th> #}
              {% if is_granted('ROLE_BERNI') %}<th>Nadaj rolę</th>{% endif %}
              {% if is_granted('ROLE_BERNI') %}<th>Usuń rolę</th>{% endif %}
          </tr>
@@ -39,21 +42,15 @@
                  <td> {{  user.getBadgeNr }} </td>
                  <td> {{  user.getCash }} </td>
                  <td> {{  user.getMoneySpent }} </td>
-                 <td> {{  user.getDiscount }} </td>
+                 <td> {{  user.getDiscount * 100}}% </td>
                  <td> {{  user.getLastLogin.format('d-m-Y') }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
-               {#  <td>
-                     <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
-                        <input style="width: 100px;" id="amount" type="number" step="1" min="1" name="amount">
-                         <input type="submit" value="Doładuj">
-                     </form>
-                 </td> #}
                  {% if is_granted('ROLE_BERNI') %} <td>
                      <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
                          <select  id="role"  name="role">
                              {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
-                         <input type="submit" value="Nadaj rolę">
+                         <input type="submit" value="Nadaj">
                      </form>
                  </td>{% endif %}
                  </td>
@@ -61,7 +58,7 @@
                      <form method="post" action="{{ path('removerole', {'userId' : user.getId}) }}">
                          <select  id="role"  name="role">
                              {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
-                         <input type="submit" value="Usuń rolę">
+                         <input type="submit" value="Usuń">
                      </form>
                      </td>{% endif %}
              </tr>

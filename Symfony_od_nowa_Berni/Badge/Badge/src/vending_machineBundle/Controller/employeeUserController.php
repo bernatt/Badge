@@ -129,9 +129,11 @@ class employeeUserController extends Controller
      * @Security("has_role('ROLE_USER')")
      *
      * Metoda pozwalająca użytkownikowi kupić produkt w automacie.
-     * Korzysta z dwóch encji ( machine i User ),
+     * Korzysta z pięciu encji ( machine, User, Distributor, typesOfservices i Transactions ),
      * Wprowadzona została walidacja zarówno ilości produktów w automacie jak i ilośći środków na koncie użytkownika.
-     * Dodana została arhiwizacja zakupów w historii encji User.
+     * Dodana została arhiwizacja zakupów encji Transactions.
+     * Kwota transakcji zapisywana jest do encji Distributor
+     * do typesOfservices zapisywany jest aktualny stan konta dystrybutora jak i sumowane są pieniądze z dystrubutora i kantyny
      */
 
     public function buyFromMachineAction(Request $request, $user_id, $product_id)
@@ -147,7 +149,8 @@ class employeeUserController extends Controller
         $distributor = $distributorRepository->findOneById(1);
 
         $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
-        $generalService = $generalServiceRepository->findOneById(1);
+        $generalServiceDistributor = $generalServiceRepository->findOneById(1);
+        $generalServiceCanteen = $generalServiceRepository->findOneById(2);
 
 
         // Pobieram z formularza wartość quantity
@@ -196,14 +199,21 @@ class employeeUserController extends Controller
         //Wpłacam pieniądze użytkownika na konto Automatu sprzedażowego
         $distributor->addMoney($price);
         //Linkuję pieniądze automatu do tabeli typesOfservices
-        $generalService->cashFromService($price);
+        $generalServiceDistributor->cashFromService($price);
+
+        $distributorMoney = $generalServiceDistributor->getCash();
+        $canteenMomey= $generalServiceCanteen->getCash();
+        $total_cash = $distributorMoney + $canteenMomey;
+        $generalServiceCanteen->setTotalCash($total_cash);
+        $generalServiceDistributor->setTotalCash($total_cash);
 
 
         $em->persist($transaction);
         $em->persist($user);
         $em->persist($product);
         $em->persist($distributor);
-        $em->persist($generalService);
+        $em->persist($generalServiceDistributor);
+        $em->persist($generalServiceCanteen);
         $em->flush();
 
         return $this->render('@vending_machine/employee/summaryOfPurchases.html.twig',['price' => $price,'user' => $user, 'product' => $product]);

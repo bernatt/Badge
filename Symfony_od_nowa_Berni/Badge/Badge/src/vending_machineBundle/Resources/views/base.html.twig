@@ -64,8 +64,8 @@
                     </li>
                     <li><a href="#">Historia</a>
                         <ul>
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showhistory') }}"> Zobacz historię zakupów </a></li>{% endif %}
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('clearhistory') }}"> Wyczysć historię zakupów </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('showhistory') }}"> Historia kupowanych obiadów </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('clearhistory') }}"> Wyczysć historię obiadów </a></li>{% endif %}
                             {% if is_granted('ROLE_USER') %}<li><a href="{{ path('transactionhistory') }}"> Historia transakcji </a></li>{% endif %}
                         </ul>
                     </li>

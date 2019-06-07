@@ -30,7 +30,14 @@ class Canteen
     private $kindOfMeal;
 
     /**
-     * @var string
+     * @var integer
+     *
+     * @ORM\Column(name="numberOfPurchased", type="integer")
+     */
+    private $numberOfPurchased = 0;
+
+    /**
+     * @var float
      *
      * @ORM\Column(name="earnedCash", type="decimal", precision=10, scale=2)
      */
@@ -147,4 +154,119 @@ class Canteen
     {
         return $this->type;
     }
+
+    /**
+     * Add vegan
+     *
+     * @param \vending_machineBundle\Entity\Vegan $vegan
+     *
+     * @return Canteen
+     */
+    public function addVegan(\vending_machineBundle\Entity\Vegan $vegan)
+    {
+        $this->vegan[] = $vegan;
+
+        return $this;
+    }
+
+    /**
+     * Remove vegan
+     *
+     * @param \vending_machineBundle\Entity\Vegan $vegan
+     */
+    public function removeVegan(\vending_machineBundle\Entity\Vegan $vegan)
+    {
+        $this->vegan->removeElement($vegan);
+    }
+
+    /**
+     * Get vegan
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVegan()
+    {
+        return $this->vegan;
+    }
+
+    /**
+     * Add meat
+     *
+     * @param \vending_machineBundle\Entity\Meat $meat
+     *
+     * @return Canteen
+     */
+    public function addMeat(\vending_machineBundle\Entity\Meat $meat)
+    {
+        $this->meat[] = $meat;
+
+        return $this;
+    }
+
+    /**
+     * Remove meat
+     *
+     * @param \vending_machineBundle\Entity\Meat $meat
+     */
+    public function removeMeat(\vending_machineBundle\Entity\Meat $meat)
+    {
+        $this->meat->removeElement($meat);
+    }
+
+    /**
+     * Get meat
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeat()
+    {
+        return $this->meat;
+    }
+
+    public static function costOfDinner($badge_color)
+    {
+        if ($badge_color == 'niebieski'){
+            $price = 1;
+        }
+        elseif ($badge_color == 'zielony'){
+            $price = 2;
+        }
+        else{
+            $price = 10;
+        }
+        return $price;
+    }
+
+    public function buyDinner($badgeColor)
+    {
+        $this->earnedCash = $this->earnedCash + Canteen::costOfDinner($badgeColor);
+    }
+
+    public static function dateTranslate($day)
+    {
+        if ($day == 1){
+            $curentDay = 'Poniedziałek';
+        }
+        elseif ($day == 2){
+            $curentDay = 'Wtorek';
+        }
+        elseif ($day == 3){
+            $curentDay = 'Środa';
+        }
+        elseif ($day == 4){
+            $curentDay = 'Czwartek';
+        }
+        elseif ($day == 5){
+            $curentDay = 'Piątek';
+        }
+        elseif ($day == 6){
+            $curentDay = 'Sobota';
+        }
+        else{
+            $curentDay = 'Niedziela';
+        }
+
+        return $curentDay;
+    }
+
 }

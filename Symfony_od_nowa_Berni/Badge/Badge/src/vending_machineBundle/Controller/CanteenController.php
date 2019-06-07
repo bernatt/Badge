@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use vending_machineBundle\Entity\Canteen;
+use vending_machineBundle\Entity\Vegan;
 use vending_machineBundle\Form\CanteenType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -148,29 +149,40 @@ class CanteenController extends Controller
         $user = $userRepository->find($userId);
 
         $mealRepository = $em->getRepository('vending_machineBundle:Canteen');
+
         // Pobieram repo general Canteen
         $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
-        $generalService = $generalServiceRepository->findOneById(2);
+        $generalServiceCanteen = $generalServiceRepository->findOneById(2);
+        $generalServiceDistributor = $generalServiceRepository->findOneById(1);
+
+        $dateTime = new \DateTime('now');
+        $day = $dateTime->format('N');
+        $curentDay = Canteen::dateTranslate($day);
+
+        $veganRepository = $em->getRepository('vending_machineBundle:Vegan');
+        $whatsDay = $veganRepository->findOneByDay($curentDay);
 
         //W zależności od tego jaki obiadek wybrał użytkownik dokonujemy transakcji
         //Metoda buy dinner sprawdza jaką cenę ma zapłacić użytkownik na podstawie koloru badga
 
-        if ($meal == 'wegetariańskie'){
-            $dish = $mealRepository->findOneById(2);
+        if ($meal == 'Wegetariańskie'){
+            $dish = $mealRepository->findOneByKindOfMeal($meal);
             $dish->buyDinner($user->getBadgeColor());
+            $dish->upgradeNumberOfPurchased();
             $session->set('kindOfmeal', 'vegan');
         }
 
         else{
-            $dish = $mealRepository->findOneById(3);
+            $dish = $mealRepository->findOneByKindOfMeal($meal);
             $dish->buyDinner($user->getBadgeColor());
+            $dish->upgradeNumberOfPurchased();
             $session->set('kindOfmeal', 'meat');
         }
 
         $dinnerPrice = Canteen::costOfDinner($user->getBadgeColor());
 
         //Linkuję pieniądze kantyny do tabeli typesOfservices
-        $generalService->cashFromService($dinnerPrice);
+        $generalServiceCanteen->cashFromService($dinnerPrice);
 
         if ($user->getCash() < $dinnerPrice){
 
@@ -179,15 +191,23 @@ class CanteenController extends Controller
                 'user' => $user
             ];
         }
-        $operationHistory = "Zjadłeś dziś danie ".$meal. ", zapłaciłeś ".$dinnerPrice.", na koncie pozostało ".$user->getCash().".  ";
-        $user->addToHistory($operationHistory);
 
         $user->spentMoneyAdd($dinnerPrice);
         $user->buyFromMachine($dinnerPrice); //buyFromCanteen;)
         $user->checkDiscount();
+        $operationHistory = "W ".$whatsDay->getDay(). " zjadłeś danie ".$meal. ", zapłaciłeś ".$dinnerPrice.", na koncie pozostało ".$user->getCash().".  ";
+        $user->addToHistory($operationHistory);
+
+        $distributorMoney = $generalServiceDistributor->getCash();
+        $canteenMomey= $generalServiceCanteen->getCash();
+        $total_cash = $distributorMoney + $canteenMomey;
+
+        $generalServiceCanteen->setTotalCash($total_cash);
+        $generalServiceDistributor->setTotalCash($total_cash);
 
         $em->persist($dish);
-        $em->persist($generalService);
+        $em->persist($generalServiceCanteen);
+        $em->persist($generalServiceDistributor);
         $em->persist($user);
         $em->flush();
 

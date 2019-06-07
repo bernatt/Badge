@@ -30,7 +30,14 @@ class Canteen
     private $kindOfMeal;
 
     /**
-     * @var string
+     * @var integer
+     *
+     * @ORM\Column(name="numberOfPurchased", type="integer")
+     */
+    private $numberOfPurchased = 0;
+
+    /**
+     * @var float
      *
      * @ORM\Column(name="earnedCash", type="decimal", precision=10, scale=2)
      */
@@ -149,6 +156,30 @@ class Canteen
     }
 
     /**
+     * Set numberOfPurchased
+     *
+     * @param integer $numberOfPurchased
+     *
+     * @return Canteen
+     */
+    public function setNumberOfPurchased($numberOfPurchased)
+    {
+        $this->numberOfPurchased = $numberOfPurchased;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfPurchased
+     *
+     * @return integer
+     */
+    public function getNumberOfPurchased()
+    {
+        return $this->numberOfPurchased;
+    }
+
+    /**
      * Add vegan
      *
      * @param \vending_machineBundle\Entity\Vegan $vegan
@@ -218,10 +249,10 @@ class Canteen
 
     public static function costOfDinner($badge_color)
     {
-        if ($badge_color = 'niebieski'){
+        if ($badge_color == 'niebieski'){
             $price = 1;
         }
-        elseif ($badge_color = 'zielony'){
+        elseif ($badge_color == 'zielony'){
             $price = 2;
         }
         else{
@@ -261,5 +292,13 @@ class Canteen
 
         return $curentDay;
     }
+
+    public function upgradeNumberOfPurchased()
+    {
+        $this->numberOfPurchased = $this->numberOfPurchased + 1;
+        return $this;
+    }
+
+
 
 }

@@ -25,7 +25,7 @@
                  <td> {{  user.getBadgeNr }} </td>
                  <td> {{  user.getCash }} </td>
                  <td> {{  user.getMoneySpent }} </td>
-                 <td> {{  user.getDiscount }} </td>
+                 <td> {{  user.getDiscount * 100 }}% </td>
                  <td> {{  user.getBadgeColor }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %} </td>
                 {# <td>

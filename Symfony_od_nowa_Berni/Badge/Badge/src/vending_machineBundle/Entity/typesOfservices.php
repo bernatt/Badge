@@ -37,7 +37,7 @@ class typesOfservices
     private $cash;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="total_cash", type="decimal", precision=10, scale=2)
      */
@@ -218,5 +218,10 @@ class typesOfservices
     public function cashFromService($amount)
     {
         $this->cash = $this->cash + $amount;
+    }
+
+    public function updateTotalCash($distributor, $canteen)
+    {
+        $this->totalCash = $this->totalCash + $distributor + $canteen;
     }
 }
