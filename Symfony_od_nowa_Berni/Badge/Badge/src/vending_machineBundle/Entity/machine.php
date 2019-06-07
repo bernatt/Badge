@@ -48,6 +48,13 @@ class machine
      */
     private $stock;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numberOfSold", type="integer")
+     */
+    private $numberOfSold = 0;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Transactions", mappedBy="machine")
@@ -199,5 +206,35 @@ class machine
     public function getTransactions()
     {
         return $this->transactions;
+    }
+
+    /**
+     * Set numberOfSold
+     *
+     * @param integer $numberOfSold
+     *
+     * @return machine
+     */
+    public function setNumberOfSold($numberOfSold)
+    {
+        $this->numberOfSold = $numberOfSold;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfSold
+     *
+     * @return integer
+     */
+    public function getNumberOfSold()
+    {
+        return $this->numberOfSold;
+    }
+
+    public function updateNumberOfSold($quantity)
+    {
+        $this->numberOfSold = $this->numberOfSold + $quantity;
+        return $this;
     }
 }

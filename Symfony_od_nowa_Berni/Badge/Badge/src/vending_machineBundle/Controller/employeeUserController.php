@@ -206,6 +206,7 @@ class employeeUserController extends Controller
         $total_cash = $distributorMoney + $canteenMomey;
         $generalServiceCanteen->setTotalCash($total_cash);
         $generalServiceDistributor->setTotalCash($total_cash);
+        $product->updateNumberOfSold($quantity);
 
 
         $em->persist($transaction);

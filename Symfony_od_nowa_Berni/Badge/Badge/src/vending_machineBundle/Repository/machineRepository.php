@@ -10,4 +10,16 @@ namespace vending_machineBundle\Repository;
  */
 class machineRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOrderedByNumberOfSold()
+    {
+        $em = $this->getEntityManager();
+        $products = $em->createQuery(
+            'SELECT p FROM vending_machineBundle:machine p
+            ORDER BY p.numberOfSold DESC
+            ')
+            ->setMaxResults(10)
+            ->getResult();
+
+        return $products;
+    }
 }

@@ -4,7 +4,7 @@ namespace vending_machineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * machine
@@ -31,7 +31,11 @@ class machine
     private $productName;
 
     /**
-     * @var string
+     * @var int
+     *@Assert\GreaterThan(
+     *      value = 0,
+     *      message = "Pole musi zawierać wartość liczbową"
+     * )
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
      */
@@ -45,9 +49,25 @@ class machine
     private $stock;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="numberOfSold", type="integer")
+     */
+    private $numberOfSold = 0;
+
+
+    /**
      * @ORM\OneToMany(targetEntity="Transactions", mappedBy="machine")
      */
     private $transactions;
+
+
+
+    public function __toString()
+    {
+        return $this->productName;
+
+    }
 
 
     public function __construct()
@@ -143,5 +163,48 @@ class machine
         $this->stock = $this->stock - $quantity;
         return $this;
     }
-}
 
+    /**
+     * Get productId
+     *
+     * @return integer
+     */
+    public function getProductId()
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * Add transaction
+     *
+     * @param \vending_machineBundle\Entity\Transactions $transaction
+     *
+     * @return machine
+     */
+    public function addTransaction(\vending_machineBundle\Entity\Transactions $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \vending_machineBundle\Entity\Transactions $transaction
+     */
+    public function removeTransaction(\vending_machineBundle\Entity\Transactions $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+}

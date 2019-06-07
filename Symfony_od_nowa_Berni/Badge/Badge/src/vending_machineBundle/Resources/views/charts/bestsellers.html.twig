@@ -1,0 +1,16 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Bestsellers</title> {% endblock %}
+
+{% block header %} <h1 >Najlepiej sprzedające się produkty:  </h1>{% endblock %}
+
+    {% block body %}
+
+        <div style="margin-left: 180px;" id="div_chart"></div>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'div_chart') }}
+        </script>
+
+    {% endblock %}
