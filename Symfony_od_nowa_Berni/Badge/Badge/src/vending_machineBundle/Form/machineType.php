@@ -19,9 +19,20 @@ class machineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('productName', TextType::class, ['label' => 'Nazwa Produktu:'])
-            ->add('price', NumberType::class, ['label' => 'Cena:'])
-            ->add('stock', IntegerType::class, ['label' => 'Ilość:'])
+            ->add('productName', TextType::class, ['label' => 'Nazwa Produktu:',
+                    'attr' =>[
+                        'placeholder' => 'Wpisz nazwę produktu',
+                ]])
+            ->add('price', NumberType::class, ['label' => 'Cena:',
+                'attr' =>[
+                    'placeholder' => 'Cena produktu',
+                ]])
+            ->add('stock', IntegerType::class, ['label' => 'Ilość:',
+                'attr' =>[
+                    'min' => 1,
+                    'max' =>15,
+                    'placeholder' => 'Ilość produktu',
+                ]])
             ->add('save', SubmitType::class, ['label' => 'Dodaj produkt']);
     }
 

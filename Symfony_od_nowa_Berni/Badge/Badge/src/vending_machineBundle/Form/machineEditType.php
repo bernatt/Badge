@@ -21,7 +21,11 @@ class machineEditType extends AbstractType
         $builder
             ->add('productName', TextType::class, ['label' => 'Nazwa Produktu:'])
             ->add('price', NumberType::class, ['label' => 'Cena:'])
-            ->add('stock', IntegerType::class, ['label' => 'Ilość:'])
+            ->add('stock', IntegerType::class, ['label' => 'Ilość:',
+                'attr' =>[
+                    'min' => 1,
+                    'max' =>15,
+                ]])
             ->add('save', SubmitType::class, ['label' => 'Edytuj produkt']);
     }
 

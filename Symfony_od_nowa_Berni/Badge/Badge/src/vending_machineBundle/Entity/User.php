@@ -5,7 +5,6 @@ namespace vending_machineBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 //use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-//use vending_machineBundle\Entity\machine;
 use Doctrine\Common\Collections\ArrayCollection;
 
     /**

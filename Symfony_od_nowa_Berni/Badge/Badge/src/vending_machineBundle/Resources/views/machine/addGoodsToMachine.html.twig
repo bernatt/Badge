@@ -5,8 +5,45 @@
 {% block header %} <h1> Dodaj nowy przedmiot do dystrybutora</h1> {% endblock %}
 
 {% block body %}
+    {{ form_errors(form) }}
+
+
+
+    {{ form_start(form, {'attr': {'id': 'add_item_form'}}) }}
+    <div>
+        {{ form_label(form.productName) }}
+        {{ form_errors(form.productName) }}
+        {{ form_widget(form.productName) }}
+
+    </div>
+    <div>
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price) }}
+        {{ form_errors(form.price) }}
+    </div>
+    <div>
+        {{ form_label(form.stock) }}
+        {{ form_errors(form.stock) }}
+        {{ form_widget(form.stock) }}
+    </div>
+    <div>
+        {{ form_label(form.save) }}
+        {{ form_widget(form.save) }}
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{#
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
-{% endblock %}
-
+#}
