@@ -4,7 +4,8 @@ namespace vending_machineBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use vending_machineBundle\Entity\machine;
+//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use vending_machineBundle\Entity\machine;
 use Doctrine\Common\Collections\ArrayCollection;
 
     /**
@@ -78,6 +79,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
             parent::__construct();
             $this->transactions = new ArrayCollection();
+
+//            $doctrine = Controller::getDoctrine();
+//            $badge_nr = $doctrine->getRepository('@vending_machineBundle:User')->findLastRegisteredBadgeNr();
+//            $this->setBadgeNr($badge_nr + 1);
+
         }
 
     
@@ -180,6 +186,11 @@ use Doctrine\Common\Collections\ArrayCollection;
         public static function hereRoles()
         {
             return ['ROLE_ADMIN', 'ROLE_BERNI'];
+        }
+
+        public static function badgeColors()
+        {
+            return ['niebieski', 'zielony', 'żółty'];
         }
 
     /**

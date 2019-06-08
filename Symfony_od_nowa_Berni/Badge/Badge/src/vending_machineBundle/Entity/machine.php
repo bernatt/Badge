@@ -27,14 +27,15 @@ class machine
      * @var string
      *
      * @ORM\Column(name="product_name", type="string", unique=true)
+     * @Assert\Length(min="3", minMessage="Za krótka nazwa")
      */
     private $productName;
 
     /**
      * @var int
-     *@Assert\GreaterThan(
-     *      value = 0,
-     *      message = "Pole musi zawierać wartość liczbową"
+     *@Assert\Type(
+     *     type="double",
+     *     message="Podana wartość {{ value }} nie jest poprawnym typen danych {{ type }}."
      * )
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
@@ -45,6 +46,10 @@ class machine
      * @var int
      *
      * @ORM\Column(name="stock", type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="Podana wartość {{ value }} nie jest poprawnym typen danych {{ type }}."
+     * )
      */
     private $stock;
 

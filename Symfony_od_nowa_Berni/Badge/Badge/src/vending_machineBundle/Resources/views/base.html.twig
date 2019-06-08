@@ -69,13 +69,14 @@
                             {% if is_granted('ROLE_USER') %}<li><a href="{{ path('transactionhistory') }}"> Historia transakcji </a></li>{% endif %}
                         </ul>
                     </li>
-                    <li><a href="#">Finanse</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                     <li><a href="#">Finanse</a>
                         <ul>
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('generalmoney') }}"> Wykres 1 </a></li>{% endif %}
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('bestsellers') }}"> Wykres 2 </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('generalmoney') }}"> Zestawienie finansowe </a></li>{% endif %}
+                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('bestsellers') }}"> Bestsellery </a></li>{% endif %}
                         </ul>
                     </li>
-
+                    {% endif %}
                 </ol>
 
             </div>

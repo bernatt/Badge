@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use vending_machineBundle\Entity\machine;
+use vending_machineBundle\Form\machineEditType;
 use vending_machineBundle\Form\machineType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -32,18 +33,19 @@ class machineController extends Controller
             return ['form' => $form->createView()];
         }
 
-        $createItem = new machine();
-        $form = $this->createForm(machineType::class, $createItem);
 
+        $form = $this->createForm(machineType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $createUser = $form->getData();
+            $createItem = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($createUser);
+            $em->persist($createItem);
             $em->flush();
+            return $this->redirectToRoute('stockInMachine');
         }
-        return $this->redirect('/availableGoods');
+
+        return ['form' => $form->createView()];
     }
 
     /**
@@ -62,7 +64,7 @@ class machineController extends Controller
             return new Response('Przedmiot o podanym ID nie istnieje');
         }
 
-        $form = $this->createForm(machineType::class, $item);
+        $form = $this->createForm(machineEditType::class, $item);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,9 +73,11 @@ class machineController extends Controller
             $em->persist($item);
             $em->flush();
 
-            return $this->redirect('/availableGoods');
+            return $this->redirectToRoute('stockInMachine');
         }
-        return['form' => $form->createView()];
+        return[
+            'form' => $form->createView(),
+            ];
     }
 
     /**

@@ -1,0 +1,12 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Over limit</title> {% endblock %}
+
+{% block header %} <h1 >Przekroczono limit!  </h1>{% endblock %}
+
+    {% block body %}
+
+       <p>Dla Twojego bezpieczeństwa dopuszczalna ilość środków na koncie została ograniczona do 1000.</p>
+        <p>Próbujesz wpłacić za dużo, aktualny stan Twojego konta wynosi {{ moneyAccount }}</p>
+
+    {% endblock %}

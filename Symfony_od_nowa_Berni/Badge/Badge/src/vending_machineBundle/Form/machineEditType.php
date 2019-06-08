@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class machineType extends AbstractType
+class machineEditType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ class machineType extends AbstractType
             ->add('productName', TextType::class, ['label' => 'Nazwa Produktu:'])
             ->add('price', NumberType::class, ['label' => 'Cena:'])
             ->add('stock', IntegerType::class, ['label' => 'Ilość:'])
-            ->add('save', SubmitType::class, ['label' => 'Dodaj produkt']);
+            ->add('save', SubmitType::class, ['label' => 'Edytuj produkt']);
     }
 
     /**

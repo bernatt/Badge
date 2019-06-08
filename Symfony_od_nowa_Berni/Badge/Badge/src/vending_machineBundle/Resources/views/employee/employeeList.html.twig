@@ -16,7 +16,7 @@
          }
          .content
          {
-            width: 1600px;
+            width: 1800px;
          }
      </style>
      <table>
@@ -31,6 +31,8 @@
              <th>Ostatnie </br>logowanie</th>
              <th>Rola</th>
              <th>Edytuj profil</th>
+             <th>Kolor badża</th>
+             <th>Zmień kolor</br> badża</th>
              {% if is_granted('ROLE_BERNI') %}<th>Nadaj rolę</th>{% endif %}
              {% if is_granted('ROLE_BERNI') %}<th>Usuń rolę</th>{% endif %}
          </tr>
@@ -46,6 +48,14 @@
                  <td> {{  user.getLastLogin.format('d-m-Y') }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
+                 <td> {{  user.getBadgeColor }}</td>
+                 {% if is_granted('ROLE_BERNI') %} <td>
+                     <form method="post" action="{{ path('changebadgecolor', {'userId' : user.getId}) }}">
+                         <select  id="color"  name="color">
+                             {% for color in colors %}<option>{{ color }}</option>{% endfor %}</select>
+                         <input type="submit" value="Nadaj">
+                     </form>
+                     </td>{% endif %}
                  {% if is_granted('ROLE_BERNI') %} <td>
                      <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
                          <select  id="role"  name="role">

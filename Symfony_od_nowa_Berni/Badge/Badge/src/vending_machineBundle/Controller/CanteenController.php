@@ -138,6 +138,7 @@ class CanteenController extends Controller
     /**
      * @Route("/payForDinner/{meal}", name="payfordinner")
      * @Template("@vending_machine/employee/noEnoughMoney.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function payForDinnerAction(SessionInterface $session, $meal)

@@ -60,10 +60,12 @@ class employeeUserController extends Controller
 
         $users = $repository->findAll();
         $roles = User::hereRoles();
+        $colors = User::badgeColors();
 
         return[
             'users' => $users,
-            'roles' => $roles
+            'roles' => $roles,
+            'colors' => $colors
         ];
     }
 
@@ -87,7 +89,8 @@ class employeeUserController extends Controller
     }
 
     /**
-     * @Route("/payment/{id}", name="deposit", methods="POST")
+     * @Route("/deposit/{id}", name="deposit", methods="POST")
+     * @Template("@vending_machine/employee/depositToMuch.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
 
@@ -95,11 +98,19 @@ class employeeUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('vending_machineBundle:User');
-        $employee = $repository->find($id);
+        $user = $repository->findOneById($id);
 
-        $employee->deposit($request->request->get('amount'));           //Korzystam z metody encji employee
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($employee);
+        $moneyOnAccount = $user->getCash();
+        $amount = $request->request->get('amount');
+
+        if ($moneyOnAccount + $amount > 1000){
+            return [
+                'moneyAccount' => $moneyOnAccount
+            ];
+        }
+
+        $user->deposit($amount);
+        $em->persist($user);
         $em->flush();
 
         return $this->redirectToRoute('showprofile');
@@ -280,6 +291,7 @@ class employeeUserController extends Controller
 
     /**
      * @Route("/addRole/{userId}", name="addrole")
+     * @Security("has_role('ROLE_BERNI')")
      */
 
     public function addRoleAction(Request $request, $userId)
@@ -300,6 +312,7 @@ class employeeUserController extends Controller
 
     /**
      * @Route("/removeRole/{userId}", name="removerole")
+     * @Security("has_role('ROLE_BERNI')")
      */
 
     public function removeRoleAction(Request $request, $userId)
@@ -312,6 +325,26 @@ class employeeUserController extends Controller
 
 
         $user->removeRole($role);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('showemployees');
+    }
+
+    /**
+     * @Route("/changeBadgeColor/{userId}", name="changebadgecolor")
+     * @Security("has_role('ROLE_BERNI')")
+     */
+
+    public function changeBadgeColorAction(Request $request, $userId)
+    {
+        $color = $request->request->get('color');
+
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('vending_machineBundle:User');
+        $user = $userRepository->findOneById($userId);
+
+        $user->setBadgeColor($color);
         $em->persist($user);
         $em->flush();
 

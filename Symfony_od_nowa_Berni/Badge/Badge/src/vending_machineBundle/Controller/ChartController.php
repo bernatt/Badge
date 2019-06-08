@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Chart controller.
@@ -17,6 +18,7 @@ class ChartController extends Controller
     /**
      * @Route("/generalMoney", name="generalmoney")
      * @Template("@vending_machine/charts/generalMoney.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
     public function generalMoneyChartAction()
@@ -41,6 +43,8 @@ class ChartController extends Controller
         $pieChart->getOptions()->setTitle('Udział gałęzi usług w ogólnie generowanym zysku');
         $pieChart->getOptions()->setHeight(400);
         $pieChart->getOptions()->setWidth(900);
+        //$pieChart->getOptions()->setIs3D(true);
+        $pieChart->getOptions()->setPieHole(0.3);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
         $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
@@ -66,6 +70,8 @@ class ChartController extends Controller
         $pieChartCanteen->getOptions()->setTitle('Udział rodzai posiłków w generowanym przez stołówkę zysku');
         $pieChartCanteen->getOptions()->setHeight(400);
         $pieChartCanteen->getOptions()->setWidth(900);
+        //$pieChartCanteen->getOptions()->setIs3D(true);
+        $pieChartCanteen->getOptions()->setPieHole(0.3);
         $pieChartCanteen->getOptions()->getTitleTextStyle()->setBold(true);
         $pieChartCanteen->getOptions()->getTitleTextStyle()->setColor('#009900');
         $pieChartCanteen->getOptions()->getTitleTextStyle()->setItalic(true);
@@ -82,6 +88,7 @@ class ChartController extends Controller
     /**
      * @Route("/bestsellers", name="bestsellers")
      * @Template("@vending_machine/charts/bestsellers.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 
     public function bestsellersChartAction()
@@ -89,14 +96,18 @@ class ChartController extends Controller
         $doctrine = $this->getDoctrine();
         $products = $doctrine->getRepository('vending_machineBundle:machine')->findOrderedByNumberOfSold();
 
+//        $retArr = [];
+//
+//        for($i=0;$i<count($products);$i++){
+//            $retArr[$i] = [$products[$i]->getProductName() => $products[$i]->getNumberOfSold()];
+//        }
+
+        //var_dump($retArr);
 
         $pieChart = new PieChart();
         $pieChart->getData()->setArrayToDataTable(
             [['Produkt', 'Ilość sprzedanych'],
 
-//                foreach ($products as $product){
-//                    [$product->getProductName(), $product->getNumberOfSold()];
-//                }
             [$products[0]->getProductName(), $products[0]->getNumberOfSold()],
             [$products[1]->getProductName(), $products[1]->getNumberOfSold()],
             [$products[2]->getProductName(), $products[2]->getNumberOfSold()],
@@ -107,12 +118,13 @@ class ChartController extends Controller
             [$products[7]->getProductName(), $products[7]->getNumberOfSold()],
             [$products[8]->getProductName(), $products[8]->getNumberOfSold()],
             [$products[9]->getProductName(), $products[9]->getNumberOfSold()],
-
+           // $retArr
             ]
         );
-        $pieChart->getOptions()->setTitle('Lista dziesięciu najlepiej sprzedających się produktów');
+        $pieChart->getOptions()->setTitle('Dziesięć najlepiej sprzedających się produktów');
         $pieChart->getOptions()->setHeight(400);
         $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->setIs3D(true);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
         $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);

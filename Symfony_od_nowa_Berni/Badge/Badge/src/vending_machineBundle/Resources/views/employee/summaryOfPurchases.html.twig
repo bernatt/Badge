@@ -2,13 +2,13 @@
 
 {% block title %} <title>Podsumowanie zakupów</title> {% endblock %}
 
-{% block header %} <h1> Dziękujemy za zakupy! </h1>{% endblock %}
+{% block header %} <h1 style="margin-top: 200px;"> Dziękujemy za zakupy! </h1>{% endblock %}
 
 
  {% block body %}
      <p style="text-align: left; width: 750px; margin-right: auto; margin-left: auto;">
      <h3>Podsumowanie:</h3>
-     <p>Kupiłeś {{ product.getProductName }} za
+     <p>Zakupiono {{ product.getProductName }} za
          <span style="color: brown">{{ price }}</span>,
          &nbsp na Twoim koncie pozostało
          <span style="color: brown">{{ user.getCash }}</span>.</p>
