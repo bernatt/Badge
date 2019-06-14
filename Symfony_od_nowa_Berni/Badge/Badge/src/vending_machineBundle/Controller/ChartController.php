@@ -96,31 +96,17 @@ class ChartController extends Controller
         $doctrine = $this->getDoctrine();
         $products = $doctrine->getRepository('vending_machineBundle:machine')->findOrderedByNumberOfSold();
 
-//        $retArr = [];
-//
-//        for($i=0;$i<count($products);$i++){
-//            $retArr[$i] = [$products[$i]->getProductName() => $products[$i]->getNumberOfSold()];
-//        }
+        $retArr = [['Produkt', 'Ilość sprzedanych']];
 
-        //var_dump($retArr);
+        for($i=0;$i<count($products);$i++){
+            $retArr[] = [$products[$i]->getProductName() , $products[$i]->getNumberOfSold()];
+        }
 
         $pieChart = new PieChart();
         $pieChart->getData()->setArrayToDataTable(
-            [['Produkt', 'Ilość sprzedanych'],
-
-            [$products[0]->getProductName(), $products[0]->getNumberOfSold()],
-            [$products[1]->getProductName(), $products[1]->getNumberOfSold()],
-            [$products[2]->getProductName(), $products[2]->getNumberOfSold()],
-            [$products[3]->getProductName(), $products[3]->getNumberOfSold()],
-            [$products[4]->getProductName(), $products[4]->getNumberOfSold()],
-            [$products[5]->getProductName(), $products[5]->getNumberOfSold()],
-            [$products[6]->getProductName(), $products[6]->getNumberOfSold()],
-            [$products[7]->getProductName(), $products[7]->getNumberOfSold()],
-            [$products[8]->getProductName(), $products[8]->getNumberOfSold()],
-            [$products[9]->getProductName(), $products[9]->getNumberOfSold()],
-           // $retArr
-            ]
+            $retArr
         );
+
         $pieChart->getOptions()->setTitle('Dziesięć najlepiej sprzedających się produktów');
         $pieChart->getOptions()->setHeight(400);
         $pieChart->getOptions()->setWidth(900);

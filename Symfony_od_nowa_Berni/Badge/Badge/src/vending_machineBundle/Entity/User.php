@@ -4,13 +4,12 @@ namespace vending_machineBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 
     /**
     * @ORM\Entity
     * @ORM\Table(name="fos_user")
-     * @ORM\Entity(repositoryClass="vending_machineBundle\Repository\employeeRepository")
+     * @ORM\Entity(repositoryClass="vending_machineBundle\Repository\UserRepository")
     */
 
     class User extends BaseUser
@@ -75,13 +74,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
         public function __construct()
         {
-
             parent::__construct();
             $this->transactions = new ArrayCollection();
-
-//            $doctrine = Controller::getDoctrine();
-//            $badge_nr = $doctrine->getRepository('@vending_machineBundle:User')->findLastRegisteredBadgeNr();
-//            $this->setBadgeNr($badge_nr + 1);
 
         }
 

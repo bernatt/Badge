@@ -32,7 +32,7 @@ class machine
     private $productName;
 
     /**
-     * @var int
+     * @var float
      *@Assert\Type(
      *     type="double",
      *     message="Podana wartość {{ value }} nie jest poprawnym typen danych {{ type }}."
