@@ -13,7 +13,11 @@ use vending_machineBundle\Form\employeeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
-
+/**
+ * Class employeeUserController
+ * @package vending_machineBundle\Controller
+ * @Route("user")
+ */
 
 class employeeUserController extends Controller
 {
@@ -218,7 +222,7 @@ class employeeUserController extends Controller
         $generalServiceCanteen->setTotalCash($total_cash);
         $generalServiceDistributor->setTotalCash($total_cash);
         $product->updateNumberOfSold($quantity);
-
+        $user->checkDiscount();
 
         $em->persist($transaction);
         $em->persist($user);
@@ -286,7 +290,7 @@ class employeeUserController extends Controller
         $em->persist($user);
         $em->flush();
 
-        return $this->redirect('/showHistory');
+        return $this->redirectToRoute('showhistory');
     }
 
     /**
@@ -349,5 +353,16 @@ class employeeUserController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('showemployees');
+    }
+
+    /**
+     * @Route("/showDiscount", name="discountshow")
+     * @Template("@vending_machine/employee/discount.html.twig")
+     *
+     */
+
+    public function showDiscountAction()
+    {
+        return [];
     }
 }

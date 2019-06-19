@@ -49,28 +49,33 @@
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
                  <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
                  <td> {{  user.getBadgeColor }}</td>
-                 {% if is_granted('ROLE_BERNI') %} <td>
+
+                 {% if user.getUsername != 'admin' %}
+                 {% if is_granted('ROLE_ADMIN') %} <td>
                      <form method="post" action="{{ path('changebadgecolor', {'userId' : user.getId}) }}">
                          <select  id="color"  name="color">
                              {% for color in colors %}<option>{{ color }}</option>{% endfor %}</select>
                          <input type="submit" value="Nadaj">
                      </form>
-                     </td>{% endif %}
+                     </td>{% endif %}{% endif %}
+
+                 {% if user.getUsername != 'admin' %}
                  {% if is_granted('ROLE_BERNI') %} <td>
                      <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
                          <select  id="role"  name="role">
                              {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
                          <input type="submit" value="Nadaj">
                      </form>
-                 </td>{% endif %}
-                 </td>
+                 </td>{% endif %}{% endif %}
+
+                 {% if user.getUsername != 'admin' %}
                  {% if is_granted('ROLE_BERNI') %} <td>
                      <form method="post" action="{{ path('removerole', {'userId' : user.getId}) }}">
                          <select  id="role"  name="role">
                              {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
                          <input type="submit" value="Usuń">
                      </form>
-                     </td>{% endif %}
+                     </td>{% endif %}{% endif %}
              </tr>
          {% endfor %}
      </table>

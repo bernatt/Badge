@@ -72,8 +72,8 @@
                     {% if is_granted('ROLE_ADMIN') %}
                      <li><a href="#">Finanse</a>
                         <ul>
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('generalmoney') }}"> Zestawienie finansowe </a></li>{% endif %}
-                            {% if is_granted('ROLE_USER') %}<li><a href="{{ path('bestsellers') }}"> Bestsellery </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('generalmoney') }}"> Zestawienie finansowe </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('bestsellers') }}"> Bestsellery </a></li>{% endif %}
                         </ul>
                     </li>
                     {% endif %}
@@ -86,9 +86,34 @@
 
         <div class="content">
 
-            {% block header %} <h1> Strona główna </h1>{% endblock %}
+            {% block header %} <h1> </h1>{% endblock %}
 
-            {% block body %}{% endblock %}
+            {% block body %}
+
+                <div style="width: 100%; letter-spacing: 3px; font-size: 54px;">Work hard, Have fun, <span style="color: brown;">Eat well</span>!</div>
+
+                <div style="float: left; margin-top: 80px; text-align: left; width: 300px;">
+
+                    <p>Zarejestruj konto aby móc swobodnie korzsytać ze wszystkich automatów sprzedażowych a także stołówki dostępnych
+                    w naszej firmie. Koniec z noszeniem milionów monet, doładowuj swojego badga i zapomnij o zbędnych kilogramach w kieszeniach!</p>
+
+                </div>
+
+               <div style="float:left; margin-top: 100px;"> <img src="{{ asset('bundles/vending_machine/img/propaganda.jpg') }}" /></div>
+
+                <div style="float: left; margin-top: 80px; width: 300px; text-align: right; ">
+
+                    <p>Udogodnienia jakie na Ciebie czekają! </p>
+                    <p>W zależności od ilości wydanej gotówki w automatach naliczany jest rabat na każde kolejne zakupy
+                        <a href="{{ path('discountshow') }}"> <span style="color: brown">(sprawdź)</span> </a>
+                    </p>
+                    <p>Pracuj solidnie, zdobądź nowe kolory badga i płać mniej za obiady (info na stołówce).</p>
+
+                </div>
+
+                <div style="clear: both;"></div>
+
+            {% endblock %}
 
         </div>
 
@@ -102,7 +127,7 @@
     </div>
     <script src="{{ asset('bundles/vending_machine/jquery/jquery-1.11.3.min.js') }}"></script>
 
-   <!-- <script>
+   <script>
 
         $(document).ready(function() {
             var NavY = $('.menu').offset().top;
@@ -124,7 +149,7 @@
             });
         });
 
-    </script> -->
+    </script> 
 
 </body>
 </html>

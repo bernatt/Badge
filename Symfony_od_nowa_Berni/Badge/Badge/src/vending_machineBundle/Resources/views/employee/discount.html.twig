@@ -1,0 +1,23 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Zniżki za zakupy</title> {% endblock %}
+
+{% block header %} <h1> Upust jaki otrzymasz w zależności od ilości wydanych środków: </h1>{% endblock %}
+
+ {% block body %}
+
+     <style>
+         p
+         {
+             font-size: 26px;
+
+         }
+     </style>
+
+     <p>0-199 zł: &nbsp; brak upustu  </p>
+     <p>200-299 zł: &nbsp; upust <span style="color: brown">10% </span> </p>
+     <p>300-499 zł: &nbsp; upust <span style="color: brown">15% </span></p>
+     <p>500-999 zł: &nbsp; upust <span style="color: brown">20% </span> </p>
+     <p>1000 zł i więcej: &nbsp; upust <span style="color: brown">25% </span> </p>
+
+ {% endblock %}

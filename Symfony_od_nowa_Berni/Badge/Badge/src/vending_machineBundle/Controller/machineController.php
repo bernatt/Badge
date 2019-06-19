@@ -12,6 +12,11 @@ use vending_machineBundle\Form\machineEditType;
 use vending_machineBundle\Form\machineType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * Class machineController
+ * @package vending_machineBundle\Controller
+ * @Route("distributor")
+ */
 
 class machineController extends Controller
 {
