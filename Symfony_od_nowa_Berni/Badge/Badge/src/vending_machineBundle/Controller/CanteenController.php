@@ -123,6 +123,28 @@ class CanteenController extends Controller
     }
 
     /**
+     * @Route("/weeklyRating", name="weeklyrating")
+     * @Template("@vending_machine/canteen/weeklyMenuWithRating.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+
+    public function weeklyMenuWithRatingAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $veganRepository = $em->getRepository('vending_machineBundle:Vegan');
+        $vegan = $veganRepository->findAll();
+
+        $meatRepository = $em->getRepository('vending_machineBundle:Meat');
+        $meat = $meatRepository->findAll();
+
+        return[
+            'vegan' => $vegan,
+            'meat' => $meat,
+            'n' => 6
+        ];
+    }
+
+    /**
      * @Route("/getDinner", name="getdinner", methods="GET")
      * @Template("@vending_machine/canteen/getDinner.html.twig")
      * @Security("has_role('ROLE_USER')")
@@ -153,8 +175,8 @@ class CanteenController extends Controller
 
         // Pobieram repo general Canteen
         $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
-        $generalServiceCanteen = $generalServiceRepository->findOneById(2);
-        $generalServiceDistributor = $generalServiceRepository->findOneById(1);
+        $generalServiceCanteen = $generalServiceRepository->findOneByName('canteen');
+        $generalServiceDistributor = $generalServiceRepository->findOneByName('distributor');
 
         $dateTime = new \DateTime('now');
         $day = $dateTime->format('N');
@@ -180,6 +202,7 @@ class CanteenController extends Controller
             $session->set('kindOfmeal', 'meat');
         }
 
+        //Sprawdzam ile kosztyuje obiad dla danego użytkownika
         $dinnerPrice = Canteen::costOfDinner($user->getBadgeColor());
 
         //Linkuję pieniądze kantyny do tabeli typesOfservices

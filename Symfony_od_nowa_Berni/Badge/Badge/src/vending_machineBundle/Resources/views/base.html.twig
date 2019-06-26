@@ -58,6 +58,7 @@
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('newmeat') }}"> Dodaj danie mięsne </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showvegan') }}"> Menu vege </a></li>{% endif %}
                             {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('showmeat') }}"> Menu mięsne </a></li>{% endif %}
+                            {% if is_granted('ROLE_ADMIN') %} <li><a href="{{ path('weeklyrating') }}"> Rating dań </a></li>{% endif %}
                             {% if is_granted('ROLE_USER') %} <li><a href="{{ path('weeklymenu') }}"> Menu tygodniowe </a></li>{% endif %}
                             {% if is_granted('ROLE_USER') %} <li><a href="{{ path('getdinner') }}"> Pobierz obiadek </a></li>{% endif %}
                         </ul>

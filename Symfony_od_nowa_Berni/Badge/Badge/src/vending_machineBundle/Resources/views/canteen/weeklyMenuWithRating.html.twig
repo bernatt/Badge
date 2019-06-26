@@ -1,0 +1,31 @@
+{% extends '@vending_machine/base.html.twig' %}
+
+{% block title %} <title>Menu tygodniowe</title> {% endblock %}
+
+{% block header %} <h1 style="margin-bottom: 70px;">Menu dań serwowanych w tym tygodniu na stołówce:  </h1>{% endblock %}
+
+    {% block body %}
+
+        <style>
+            p
+            {
+                margin-top: 0;
+                margin-bottom: 15px;
+            }
+        </style>
+        <ul class="menuu">
+
+            {% for i in 0..n %}
+                {{ meat[i].getDay }}
+                <li>
+                    <span style="margin-right: 5px; font-size: 20px;"> Danie mięsne: </span><span style="color: red; margin-bottom: 5px;"> {{ meat[i].getDish }} </span>
+                    <p>{{vegan[i].ratingResponse(meat[i].getRating)}} (rating: {{ meat[i].getRating|round(1) }})</p>
+                    </li>
+                <li>
+                    <span style="margin-right: 5px; font-size: 20px;">Danie vege:</span> <span style="color: #6b9311"> {{ vegan[i].getDish }}</span>
+                    <p>{{vegan[i].ratingResponse(vegan[i].getRating)}} (rating: {{ vegan[i].getRating|round(1) }})</p>
+                </li><br>
+            {% endfor %}
+        </ul>
+
+    {% endblock %}

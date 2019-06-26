@@ -234,4 +234,22 @@ class Vegan
         $this->rating = $this->sumOfPoints / $this->numberOfVoters;
         return $this;
     }
+
+    public function ratingResponse($rejty)
+    {
+        if ($rejty >= 1 && $rejty < 1.7){
+            $answer = 'Ludzie tego nienawidzą';
+        }
+        elseif($rejty >= 1.7 && $rejty < 2.5){
+            $answer = 'Za dobre to to nie jest';
+        }
+        elseif($rejty >= 2.5 && $rejty < 3.2){
+            $answer = ' Wow, to danie jest naprawdę dobre ';
+        }
+        else{
+            $answer = 'To danie jest epickie!!';
+        }
+
+        return $answer;
+    }
 }

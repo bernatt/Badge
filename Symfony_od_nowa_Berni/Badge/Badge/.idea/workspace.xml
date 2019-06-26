@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60755d91-62f4-4152-ae3a-78e3cb5e00d5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Controller/ChartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Controller/ChartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/public/img/burger.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/public/img/salad2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Entity/Vegan.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Entity/Vegan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/getDinner.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/getDinner.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/charts/generalMoney.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/charts/generalMoney.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/discount.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/discount.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/employeeList.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/employeeList.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/showProfile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/showProfile.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/showTransactionHistory.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/showTransactionHistory.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/summaryOfPurchases.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/summaryOfPurchases.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/machine/availableGoods.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/machine/availableGoods.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/machine/availableGoodsForUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/machine/availableGoodsForUser.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Controller/RegistrationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Form/Type/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Form/Type/RegistrationFormType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/ChangePassword/change_password.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/ChangePassword/change_password.html.twig" afterDir="false" />
@@ -57,68 +46,82 @@
           <entry key="css" value="5" />
           <entry key="gitignore" value="1" />
           <entry key="jpg" value="4" />
-          <entry key="php" value="13" />
+          <entry key="php" value="15" />
           <entry key="png" value="3" />
-          <entry key="twig" value="21" />
+          <entry key="twig" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="5" />
           <entry key="Image" value="7" />
-          <entry key="PHP" value="13" />
+          <entry key="PHP" value="15" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Twig" value="21" />
+          <entry key="Twig" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="174" />
-          <entry key="php" value="345" />
-          <entry key="twig" value="1547" />
+          <entry key="php" value="764" />
+          <entry key="twig" value="1825" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="174" />
-          <entry key="PHP" value="345" />
-          <entry key="Twig" value="1547" />
+          <entry key="PHP" value="764" />
+          <entry key="Twig" value="1825" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/machineController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2685">
-              <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/summaryOfPurchases.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="469">
+              <caret line="153" column="5" lean-forward="true" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Entity/Vegan.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="724">
+              <caret line="252" column="23" selection-start-line="252" selection-start-column="23" selection-end-line="252" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/weeklyMenu.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
-                <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#p#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#p#3;n#!!top" expanded="true" />
+                <element signature="e#403#446#0#HTML" expanded="true" />
+                <element signature="e#475#514#0#HTML" expanded="true" />
+                <element signature="e#615#658#0#HTML" expanded="true" />
+                <element signature="e#684#706#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/weeklyMenuWithRating.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="116" />
+              <folding>
+                <element signature="e#137#165#0#HTML" expanded="true" />
+                <element signature="e#427#470#0#HTML" expanded="true" />
+                <element signature="e#499#538#0#HTML" expanded="true" />
+                <element signature="e#760#803#0#HTML" expanded="true" />
+                <element signature="e#829#851#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,8 +130,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="189" selection-start-line="24" selection-start-column="189" selection-end-line="24" selection-end-column="189" />
+            <state relative-caret-position="390">
+              <caret line="62" column="136" selection-start-line="62" selection-start-column="136" selection-end-line="62" selection-end-column="136" />
             </state>
           </provider>
         </entry>
@@ -146,8 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php" />
-        <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php" />
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/machineController.php" />
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/indexSiteController.php" />
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/ChartController.php" />
@@ -161,7 +162,11 @@
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/charts/generalMoney.html.twig" />
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/discount.html.twig" />
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/summaryOfPurchases.html.twig" />
+        <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php" />
         <option value="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php" />
+        <option value="$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/weeklyMenuWithRating.html.twig" />
+        <option value="$PROJECT_DIR$/src/vending_machineBundle/Entity/Vegan.php" />
       </list>
     </option>
   </component>
@@ -394,12 +399,12 @@
       <workItem from="1560976175697" duration="5587000" />
       <workItem from="1561050571990" duration="1871000" />
       <workItem from="1561128806968" duration="10449000" />
-      <workItem from="1561569496961" duration="1047000" />
+      <workItem from="1561569496961" duration="7965000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19933000" />
+    <option name="totallyTimeSpent" value="26851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -418,7 +423,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.1718919" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2583784" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -433,13 +438,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="272" selection-start-line="272" selection-end-line="272" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/public/img/propaganda2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -481,13 +479,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Entity/Vegan.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -590,27 +581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/machineController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2685">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="189" selection-start-line="24" selection-start-column="189" selection-end-line="24" selection-end-column="189" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/employee/summaryOfPurchases.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -623,6 +593,68 @@
             <element signature="n#style#0;n#p#3;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#p#3;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/employeeUserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="184" column="100" selection-start-line="184" selection-start-column="100" selection-end-line="184" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/machineController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/weeklyMenu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <folding>
+            <element signature="e#403#446#0#HTML" expanded="true" />
+            <element signature="e#475#514#0#HTML" expanded="true" />
+            <element signature="e#615#658#0#HTML" expanded="true" />
+            <element signature="e#684#706#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="62" column="136" selection-start-line="62" selection-start-column="136" selection-end-line="62" selection-end-column="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Resources/views/canteen/weeklyMenuWithRating.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="116" />
+          <folding>
+            <element signature="e#137#165#0#HTML" expanded="true" />
+            <element signature="e#427#470#0#HTML" expanded="true" />
+            <element signature="e#499#538#0#HTML" expanded="true" />
+            <element signature="e#760#803#0#HTML" expanded="true" />
+            <element signature="e#829#851#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Entity/Vegan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="724">
+          <caret line="252" column="23" selection-start-line="252" selection-start-column="23" selection-end-line="252" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vending_machineBundle/Controller/CanteenController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="153" column="5" lean-forward="true" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
         </state>
       </provider>
     </entry>

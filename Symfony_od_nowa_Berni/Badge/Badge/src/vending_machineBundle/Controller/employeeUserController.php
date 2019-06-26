@@ -161,11 +161,11 @@ class employeeUserController extends Controller
         $product = $productRepository->find($product_id);
 
         $distributorRepository = $em->getRepository('vending_machineBundle:Distributor');
-        $distributor = $distributorRepository->findOneById(1);
+        $distributor = $distributorRepository->findOneByKindOfDistributor('Automat do sprzedaży');
 
         $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
-        $generalServiceDistributor = $generalServiceRepository->findOneById(1);
-        $generalServiceCanteen = $generalServiceRepository->findOneById(2);
+        $generalServiceDistributor = $generalServiceRepository->findOneByName('distributor');
+        $generalServiceCanteen = $generalServiceRepository->findOneByName('canteen');
 
 
         // Pobieram z formularza wartość quantity
@@ -182,7 +182,7 @@ class employeeUserController extends Controller
         $priceBeforeDiscount = $product->getPrice() * $quantity;
         $price = $priceBeforeDiscount - ($priceBeforeDiscount * $user->getDiscount());
 
-        // Walidacja stanu gotówki kupującego z odesłaniem do szablonu informującego o kosztach zamówienia
+        // Walidacja stanu gotówki kupującego z odesłaniem do szablonu informującego braku gotówki i kosztach zamówienia
         if ($user->getCash() < $price){
 
             return [
