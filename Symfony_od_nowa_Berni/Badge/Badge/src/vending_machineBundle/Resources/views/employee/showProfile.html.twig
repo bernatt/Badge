@@ -28,13 +28,9 @@
                  <td> {{  user.getDiscount * 100 }}% </td>
                  <td> {{  user.getBadgeColor }} </td>
                  <td> {% for role in user.roles %}{{ role }}<br>{% endfor %} </td>
-                {# <td>
-                     <form method="post" action="{{ path('deposit', {'id' : user.getId}) }}">
-                         <input id="amount" type="number" step="1" min="1" name="amount">
-                         <input type="submit" value="Wpłać">
-                     </form>
-                 </td> #}
              </tr>
-
      </table>
+
+     <div style="margin-top: 50px; margin-left: 20px;"> <img src="{{ asset('bundles/vending_machine/img/cleopatra.jpg') }}" /></div>
+
  {% endblock %}

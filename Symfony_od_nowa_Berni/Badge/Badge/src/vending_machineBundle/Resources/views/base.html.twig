@@ -22,7 +22,7 @@
                             <a href="{{ path('fos_user_security_logout') }}">
                                <span style="color: brown"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </span>
                             </a>
-                            <div class="stankonta"> <p style="margin: 0;">Na koncie posiadasz : &nbsp  &nbsp<span style="color: brown; font-size: 22px;">  {{ app.user.cash }} </span></p></div>
+                            <div class="stankonta"> <p style="margin: 0;">Na koncie posiadasz : &nbsp  &nbsp<span style="color: brown; font-size: 22px;">  {{ app.user.cash|round(2, 'floor') }} </span></p></div>
                         {% else %}
                             <p style="margin-top: 0;"><a href="{{ path('fos_user_security_login') }}"> <span style="color: brown"> {{ 'layout.login'|trans({}, 'FOSUserBundle') }} </span></a></p>
                             <p style="margin-bottom: 5px;"><a href="{{ path('fos_user_registration_register') }}"> <span style="color: brown"> {{ 'layout.register'|trans({}, 'FOSUserBundle') }} </span></a></p>
@@ -92,22 +92,22 @@
 
                 <div style="width: 100%; letter-spacing: 3px; font-size: 54px;">Work hard, Have fun, <span style="color: brown;">Eat well</span>!</div>
 
-                <div style="float: left; margin-top: 80px; text-align: left; width: 300px;">
+                <div style="float: left; margin-top: 80px; text-align: left; width: 250px;">
 
-                    <p>Zarejestruj konto aby móc swobodnie korzsytać ze wszystkich automatów sprzedażowych a także stołówki dostępnych
-                    w naszej firmie. Koniec z noszeniem milionów monet, doładowuj swojego badga i zapomnij o zbędnych kilogramach w kieszeniach!</p>
+                    <p>Zarejestruj konto aby móc swobodnie korzystać ze wszystkich automatów sprzedażowych a także stołówki dostępnych
+                    w naszej firmie. Koniec z noszeniem milionów monet, doładowuj swojego badga i zapomnij o zbędnych kilogramach w kieszeni!</p>
 
                 </div>
 
-               <div style="float:left; margin-top: 100px;"> <img src="{{ asset('bundles/vending_machine/img/propaganda.jpg') }}" /></div>
+               <div style="float:left; margin-top: 100px; margin-left: 20px;"> <img src="{{ asset('bundles/vending_machine/img/propaganda.jpg') }}" /></div>
 
-                <div style="float: left; margin-top: 80px; width: 300px; text-align: right; ">
+                <div style="float: left; margin-top: 80px;margin-left: 10px; width: 250px; text-align: right; ">
 
-                    <p>Udogodnienia jakie na Ciebie czekają! </p>
-                    <p>W zależności od ilości wydanej gotówki w automatach naliczany jest rabat na każde kolejne zakupy
+                    <p>Bonusy jakie na Ciebie czekają: </p>
+                    <p>W zależności od ilości wydanej gotówki, automaty naliczają rabat na każde kolejne zakupy
                         <a href="{{ path('discountshow') }}"> <span style="color: brown">(sprawdź)</span> </a>
                     </p>
-                    <p>Pracuj solidnie, zdobądź nowe kolory badga i płać mniej za obiady (info na stołówce).</p>
+                    <p>Pracuj solidnie, zdobądź nowe kolory badga i płać mniej za obiady (więcej informacji na stołówce).</p>
 
                 </div>
 
@@ -117,13 +117,6 @@
 
         </div>
 
-        <div class="footer">
-
-        {% block footer %}
-
-        {% endblock %}
-
-        </div>
     </div>
     <script src="{{ asset('bundles/vending_machine/jquery/jquery-1.11.3.min.js') }}"></script>
 
@@ -149,7 +142,18 @@
             });
         });
 
-    </script> 
+    </script>
+
+    <footer>
+        <div class="footer">
+
+            {% block footer %}
+                Created by Berni :-)
+            {% endblock %}
+
+        </div>
+    </footer>
 
 </body>
+
 </html>

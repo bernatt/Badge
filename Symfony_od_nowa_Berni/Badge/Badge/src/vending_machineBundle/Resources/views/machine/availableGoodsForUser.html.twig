@@ -5,6 +5,13 @@
 {% block header %} <h1>Automat do sprzedaży: </h1>{% endblock %}
 
     {% block body %}
+        <div style="float: left; width: 300px;">
+            <img src="{{ asset('bundles/vending_machine/img/niskie_ceny.png') }}"/>
+            <img style="margin-top: 120px;" src="{{ asset('bundles/vending_machine/img/niskie_ceny.png') }}"/>
+            <img style="margin-top: 120px;" src="{{ asset('bundles/vending_machine/img/niskie_ceny.png') }}"/>
+            <img style="margin-top: 120px;" src="{{ asset('bundles/vending_machine/img/niskie_ceny.png') }}"/>
+        </div>
+        <div style="float: left; margin-left: 50px; margin-bottom: 80px;">
         <table>
             <tr>
                 <th>ID</th>
@@ -29,6 +36,12 @@
                 </tr>
             {% endfor %}
         </table>
+        </div>
+        <div style="float: left; width: 300px;">
+            <img src="{{ asset('bundles/vending_machine/img/sambaautomat.png') }}"/>
+            <img  style="margin-top: 200px;" src="{{ asset('bundles/vending_machine/img/sambaautomat.png') }}"/>
+        </div>
+        <div style="clear: both;"></div>
     {% endblock %}
 
 

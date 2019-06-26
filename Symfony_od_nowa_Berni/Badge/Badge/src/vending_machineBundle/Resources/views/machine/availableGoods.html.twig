@@ -5,25 +5,27 @@
 {% block header %} <h1>Automat do sprzedaży: </h1>{% endblock %}
 
     {% block body %}
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nazwa produktu</th>
-                <th>Cena</th>
-                <th>Ilość na stanie</th>
-                <th>Uzupełnij zapasy</th>
-            </tr>
-
-            {% for product in products %}
+        <div style="margin-bottom: 130px;">
+            <table>
                 <tr>
-                    <td> {{ product.getId }} </td>
-                    <td> {{ product.getProductName }} </td>
-                    <td> {{  product.getPrice }} </td>
-                    <td> {{  product.getStock }} </td>
-                    <td> <a href="{{ path('editItem', {'id' : product.getId}) }}">Dodaj</a> </td>
+                    <th>ID</th>
+                    <th>Nazwa produktu</th>
+                    <th>Cena</th>
+                    <th>Ilość na stanie</th>
+                    <th>Uzupełnij zapasy</th>
                 </tr>
-            {% endfor %}
-        </table>
+
+                {% for product in products %}
+                    <tr>
+                        <td> {{ product.getId }} </td>
+                        <td> {{ product.getProductName }} </td>
+                        <td> {{  product.getPrice }} </td>
+                        <td> {{  product.getStock }} </td>
+                        <td> <a href="{{ path('editItem', {'id' : product.getId}) }}">Dodaj</a> </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% endblock %}
 
 

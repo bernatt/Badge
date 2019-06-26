@@ -9,9 +9,9 @@
      <p style="text-align: left; width: 750px; margin-right: auto; margin-left: auto;">
      <h3>Podsumowanie:</h3>
      <p>Zakupiono {{ product.getProductName }} za
-         <span style="color: brown">{{ price }}</span>,
+         <span style="color: brown">{{ price|round(2, 'floor') }}</span>,
          &nbsp na Twoim koncie pozostało
-         <span style="color: brown">{{ user.getCash }}</span>.</p>
+         <span style="color: brown">{{ user.getCash|round(2, 'floor') }}</span>.</p>
          <p>Życzymy smacznego!</p>
      <p style="margin-top: 50px; font-size: 28px;">
          <a style="color: #6b9311;" href="{{ path('stockInMachineUser') }}"> Kontynuuj zakupy;) </a>

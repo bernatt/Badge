@@ -19,66 +19,68 @@
             width: 1800px;
          }
      </style>
-     <table>
-         <tr>
-             <th>ID</th>
-             <th>Login</th>
-             <th>Adres Email</th>
-             <th>Nr badga</th>
-             <th>Dostępne </br>środki</th>
-             <th>Wydane</br> środki</th>
-             <th>Rabat</th>
-             <th>Ostatnie </br>logowanie</th>
-             <th>Rola</th>
-             <th>Edytuj profil</th>
-             <th>Kolor badża</th>
-             <th>Zmień kolor</br> badża</th>
-             {% if is_granted('ROLE_BERNI') %}<th>Nadaj rolę</th>{% endif %}
-             {% if is_granted('ROLE_BERNI') %}<th>Usuń rolę</th>{% endif %}
-         </tr>
-         {% for user in users %}
+    <div style="margin-bottom: 130px;">
+         <table>
              <tr>
-                 <td> {{ user.getId }} </td>
-                 <td> {{ user.getUsername }} </td>
-                 <td> {{  user.getEmail }} </td>
-                 <td> {{  user.getBadgeNr }} </td>
-                 <td> {{  user.getCash }} </td>
-                 <td> {{  user.getMoneySpent }} </td>
-                 <td> {{  user.getDiscount * 100}}% </td>
-                 <td> {{  user.getLastLogin.format('d-m-Y') }} </td>
-                 <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
-                 <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
-                 <td> {{  user.getBadgeColor }}</td>
-
-                 {% if user.getUsername != 'admin' %}
-                 {% if is_granted('ROLE_ADMIN') %} <td>
-                     <form method="post" action="{{ path('changebadgecolor', {'userId' : user.getId}) }}">
-                         <select  id="color"  name="color">
-                             {% for color in colors %}<option>{{ color }}</option>{% endfor %}</select>
-                         <input type="submit" value="Nadaj">
-                     </form>
-                     </td>{% endif %}{% endif %}
-
-                 {% if user.getUsername != 'admin' %}
-                 {% if is_granted('ROLE_BERNI') %} <td>
-                     <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
-                         <select  id="role"  name="role">
-                             {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
-                         <input type="submit" value="Nadaj">
-                     </form>
-                 </td>{% endif %}{% endif %}
-
-                 {% if user.getUsername != 'admin' %}
-                 {% if is_granted('ROLE_BERNI') %} <td>
-                     <form method="post" action="{{ path('removerole', {'userId' : user.getId}) }}">
-                         <select  id="role"  name="role">
-                             {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
-                         <input type="submit" value="Usuń">
-                     </form>
-                     </td>{% endif %}{% endif %}
+                 <th>ID</th>
+                 <th>Login</th>
+                 <th>Adres Email</th>
+                 <th>Nr badga</th>
+                 <th>Dostępne </br>środki</th>
+                 <th>Wydane</br> środki</th>
+                 <th>Rabat</th>
+                 <th>Ostatnie </br>logowanie</th>
+                 <th>Rola</th>
+                 <th>Edytuj profil</th>
+                 <th>Kolor badża</th>
+                 <th>Zmień kolor</br> badża</th>
+                 {% if is_granted('ROLE_BERNI') %}<th>Nadaj rolę</th>{% endif %}
+                 {% if is_granted('ROLE_BERNI') %}<th>Usuń rolę</th>{% endif %}
              </tr>
-         {% endfor %}
-     </table>
+             {% for user in users %}
+                 <tr>
+                     <td> {{ user.getId }} </td>
+                     <td> {{ user.getUsername }} </td>
+                     <td> {{  user.getEmail }} </td>
+                     <td> {{  user.getBadgeNr }} </td>
+                     <td> {{  user.getCash }} </td>
+                     <td> {{  user.getMoneySpent }} </td>
+                     <td> {{  user.getDiscount * 100}}% </td>
+                     <td> {{  user.getLastLogin.format('d-m-Y') }} </td>
+                     <td> {% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
+                     <td> <a href="{{ path('editemployee', {'id' : user.getId}) }}">Edytuj</a> </td>
+                     <td> {{  user.getBadgeColor }}</td>
+
+                     {% if user.getUsername != 'admin' %}
+                     {% if is_granted('ROLE_ADMIN') %} <td>
+                         <form method="post" action="{{ path('changebadgecolor', {'userId' : user.getId}) }}">
+                             <select  id="color"  name="color">
+                                 {% for color in colors %}<option>{{ color }}</option>{% endfor %}</select>
+                             <input type="submit" value="Nadaj">
+                         </form>
+                         </td>{% endif %}{% endif %}
+
+                     {% if user.getUsername != 'admin' %}
+                     {% if is_granted('ROLE_BERNI') %} <td>
+                         <form method="post" action="{{ path('addrole', {'userId' : user.getId}) }}">
+                             <select  id="role"  name="role">
+                                 {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
+                             <input type="submit" value="Nadaj">
+                         </form>
+                     </td>{% endif %}{% endif %}
+
+                     {% if user.getUsername != 'admin' %}
+                     {% if is_granted('ROLE_BERNI') %} <td>
+                         <form method="post" action="{{ path('removerole', {'userId' : user.getId}) }}">
+                             <select  id="role"  name="role">
+                                 {% for role in roles %}<option>{{ role }}</option>{% endfor %}</select>
+                             <input type="submit" value="Usuń">
+                         </form>
+                         </td>{% endif %}{% endif %}
+                 </tr>
+             {% endfor %}
+         </table>
+    </div>
  {% endblock %}
 
 

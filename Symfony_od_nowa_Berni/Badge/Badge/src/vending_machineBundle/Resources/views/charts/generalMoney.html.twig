@@ -5,19 +5,20 @@
 {% block header %} <h1 >Zestawienie finansowe:  </h1>{% endblock %}
 
     {% block body %}
+        <div style="margin-bottom: 130px;">
+            <div style="margin-left: 180px;" id="div_chart"></div>
 
-        <div style="margin-left: 180px;" id="div_chart"></div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                {{ gc_draw(piechart, 'div_chart') }}
+            </script>
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            {{ gc_draw(piechart, 'div_chart') }}
-        </script>
+            <div style="width: 100%; margin: 50px;"></div>
 
-        <div style="width: 100%; margin: 50px;"></div>
-
-        <div style="margin-left: 180px;" id="div_chart2"></div>
-        <script type="text/javascript">
-            {{ gc_draw(piechartcanteen, 'div_chart2') }}
-        </script>
+            <div style="margin-left: 180px;" id="div_chart2"></div>
+            <script type="text/javascript">
+                {{ gc_draw(piechartcanteen, 'div_chart2') }}
+            </script>
+        </div>
 
     {% endblock %}

@@ -25,8 +25,8 @@ class ChartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $generalServiceRepository = $em->getRepository('vending_machineBundle:typesOfservices');
-        $generalServiceCanteen = $generalServiceRepository->findOneById(2);
-        $generalServiceDistributor = $generalServiceRepository->findOneById(1);
+        $generalServiceCanteen = $generalServiceRepository->findOneByName('canteen');
+        $generalServiceDistributor = $generalServiceRepository->findOneByName('distributor');
         $distrMoney = floor($generalServiceDistributor->getCash());
         $canteenMoney = floor($generalServiceCanteen->getCash());
 
@@ -53,8 +53,8 @@ class ChartController extends Controller
 
 
         $canteenRepository =  $em->getRepository('vending_machineBundle:Canteen');
-        $vege = $canteenRepository->findOneById(2);
-        $meat = $canteenRepository->findOneById(3);
+        $vege = $canteenRepository->findOneByKindOfMeal('Wegetariańskie');
+        $meat = $canteenRepository->findOneByKindOfMeal('Mięsne');
         $vegeCash = floor($vege->getEarnedCash());
         $meatCash = floor($meat->getEarnedCash());
 
