@@ -237,13 +237,13 @@ class Vegan
 
     public function ratingResponse($rejty)
     {
-        if ($rejty >= 1 && $rejty < 1.7){
+        if ($rejty >= 1 && $rejty < 1.5){
             $answer = 'Ludzie tego nienawidzą';
         }
-        elseif($rejty >= 1.7 && $rejty < 2.5){
+        elseif($rejty >= 1.5 && $rejty < 2.2){
             $answer = 'Za dobre to to nie jest';
         }
-        elseif($rejty >= 2.5 && $rejty < 3.2){
+        elseif($rejty >= 2.2 && $rejty < 3.2){
             $answer = ' Wow, to danie jest naprawdę dobre ';
         }
         else{
